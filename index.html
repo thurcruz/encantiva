@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Encantivo - Organize sua Festa</title>
+  <title>Encantiva</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,9 +15,14 @@
 
     <!-- Telas -->
     <section id="tela1" class="tela ativa">
-      <h1>Bem-vindo à Encantivo</h1>
-      <p>Monte sua festa em minutos!</p>
-      <button onclick="proximaTela(2)">Vamos começar</button>
+    <img src="assets/logo_horizontal.svg" alt="">
+      <h1>Seja bem-vindo!</h1>
+      <p> Clique em "Vamos começar" e monte sua festa em alguns minutos!</p>
+      <div class="buttons">
+    <button class="btn btn-primary" onclick="proximaTela(2)">Vamos começar</button>
+    <button class="btn btn-secondary">Veja como funciona</button>
+    </div>
+      
     </section>
 
     <section id="tela2" class="tela">
@@ -30,18 +35,18 @@
       <label><input type="radio" name="tipoFesta" value="15anos"> 15 Anos</label>
       <label><input type="radio" name="tipoFesta" value="bodas"> Bodas</label>
 
-      <div class="navegacao">
-        <button onclick="voltarTela(1)">Voltar</button>
-        <button onclick="proximaTela(3)">Próximo</button>
+      <div class="buttons">
+        <button class="btn btn-primary" onclick="proximaTela(3)">Próximo</button>
+        <button class="btn btn-secondary" onclick="voltarTela(1)">Voltar</button>
       </div>
     </section>
 
     <section id="tela3" class="tela">
       <h2>Escolha o tema</h2>
       <div id="listaTemas"></div>
-      <div class="navegacao">
-        <button onclick="voltarTela(2)">Voltar</button>
-        <button onclick="proximaTela(4)">Próximo</button>
+    <div class="buttons">
+        <button class="btn btn-primary" onclick="proximaTela(4)">Próximo</button>
+        <button class="btn btn-secondary" onclick="voltarTela(2)">Voltar</button>
       </div>
     </section>
 
@@ -53,9 +58,9 @@
       <label><input type="checkbox" id="semMesa"> Sem mesa</label>
 
       <div id="valorTotal">Total: R$0,00</div>
-      <div class="navegacao">
-        <button onclick="voltarTela(3)">Voltar</button>
-        <button onclick="proximaTela(5)">Próximo</button>
+    <div class="buttons">
+        <button class="btn btn-primary" onclick="proximaTela(5)">Próximo</button>
+        <button class="btn btn-secondary" onclick="voltarTela(3)">Voltar</button>
       </div>
     </section>
 
@@ -63,9 +68,9 @@
       <h2>Dados do Homenageado</h2>
       <input type="text" id="nomeHomenageado" placeholder="Nome do homenageado">
       <input type="number" id="idadeHomenageado" placeholder="Idade (se aplicável)">
-      <div class="navegacao">
-        <button onclick="voltarTela(4)">Voltar</button>
-        <button onclick="proximaTela(6)">Próximo</button>
+    <div class="buttons">
+        <button class="btn btn-primary" onclick="proximaTela(6)">Próximo</button>
+        <button class="btn btn-secondary" onclick="voltarTela(4)">Voltar</button>
       </div>
     </section>
 
@@ -76,18 +81,18 @@
       <label><input type="checkbox" value="Cupcakes"> Cupcakes</label>
       <label><input type="checkbox" value="Topper de Bolo"> Topper de Bolo</label>
 
-      <div class="navegacao">
-        <button onclick="voltarTela(5)">Voltar</button>
-        <button onclick="proximaTela(7)">Próximo</button>
+     <div class="buttons">
+        <button class="btn btn-primary" onclick="proximaTela(7)">Próximo</button>
+        <button class="btn btn-secondary" onclick="voltarTela(5)">Voltar</button>
       </div>
     </section>
 
     <section id="tela7" class="tela">
       <h2>Escolha a data</h2>
       <input type="date" id="dataFesta">
-      <div class="navegacao">
-        <button onclick="voltarTela(6)">Voltar</button>
-        <button onclick="proximaTela(8)">Próximo</button>
+    <div class="buttons">
+        <button class="btn btn-primary" onclick="proximaTela(8)">Próximo</button>
+        <button class="btn btn-secondary" onclick="voltarTela(6)">Voltar</button>
       </div>
     </section>
 
@@ -96,9 +101,9 @@
       <div id="resumo"></div>
       <p>Escaneie o QR Code para pagar:</p>
       <img src="qrcode.png" alt="QR Code de pagamento" width="200">
-      <button onclick="enviarWhatsApp()">Enviar pedido no WhatsApp</button>
-      <div class="navegacao">
-        <button onclick="voltarTela(7)">Voltar</button>
+      <button class="btn btn-primary" onclick="enviarWhatsApp()">Enviar pedido no WhatsApp</button>
+     <div class="buttons">
+        <button class="btn btn-secondary" onclick="voltarTela(7)">Voltar</button>
       </div>
     </section>
   </div>

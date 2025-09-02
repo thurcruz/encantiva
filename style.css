@@ -1,3 +1,10 @@
+:root {
+  --color-primary: #ff33cc;
+  --color-secondary: #9900ff;
+  --color-dark: #2b0a2f;
+  --font-main: 'Inter', sans-serif;
+}
+
 body {
   font-family: Arial, sans-serif;
   background: #f9f9fb;
@@ -25,19 +32,37 @@ body {
 }
 
 .navegacao {
-  margin-top: 20px;
+  
   display: flex;
   justify-content: space-between;
 }
 
-button {
-  padding: 10px 20px;
-  border-radius: 8px;
-  border: none;
+.buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+ margin-top: 20px;
+}
+
+.btn {
+  padding: 14px;
+  border-radius: 32px;
+  font-weight: 600;
   cursor: pointer;
-  background: #9933ff;
-  color: white;
-  font-weight: bold;
+  width: 100%;
+  border: none;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.btn-secondary {
+  background: #fff;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
 }
 
 button:hover {
