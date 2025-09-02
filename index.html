@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Encantivo - Organize sua Festa</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Barra de Progresso -->
+    <div id="progress-container">
+      <div id="progress-bar"></div>
+    </div>
+
+    <!-- Telas -->
+    <section id="tela1" class="tela ativa">
+      <h1>Bem-vindo à Encantivo</h1>
+      <p>Monte sua festa em minutos!</p>
+      <button onclick="proximaTela(2)">Vamos começar</button>
+    </section>
+
+    <section id="tela2" class="tela">
+      <h2>Qual seu nome?</h2>
+      <input type="text" id="nomeCliente" placeholder="Digite seu nome">
+
+      <h2>Escolha o tipo de comemoração</h2>
+      <label><input type="radio" name="tipoFesta" value="aniversario"> Aniversário</label>
+      <label><input type="radio" name="tipoFesta" value="mesversario"> Mêsversário</label>
+      <label><input type="radio" name="tipoFesta" value="15anos"> 15 Anos</label>
+      <label><input type="radio" name="tipoFesta" value="bodas"> Bodas</label>
+
+      <div class="navegacao">
+        <button onclick="voltarTela(1)">Voltar</button>
+        <button onclick="proximaTela(3)">Próximo</button>
+      </div>
+    </section>
+
+    <section id="tela3" class="tela">
+      <h2>Escolha o tema</h2>
+      <div id="listaTemas"></div>
+      <div class="navegacao">
+        <button onclick="voltarTela(2)">Voltar</button>
+        <button onclick="proximaTela(4)">Próximo</button>
+      </div>
+    </section>
+
+    <section id="tela4" class="tela">
+      <h2>Escolha o combo</h2>
+      <label><input type="radio" name="combo" value="essencial"> Essencial</label>
+      <label><input type="radio" name="combo" value="fantastico"> Fantástico</label>
+      <label><input type="radio" name="combo" value="inesquecivel"> Inesquecível</label>
+      <label><input type="checkbox" id="semMesa"> Sem mesa</label>
+
+      <div id="valorTotal">Total: R$0,00</div>
+      <div class="navegacao">
+        <button onclick="voltarTela(3)">Voltar</button>
+        <button onclick="proximaTela(5)">Próximo</button>
+      </div>
+    </section>
+
+    <section id="tela5" class="tela">
+      <h2>Dados do Homenageado</h2>
+      <input type="text" id="nomeHomenageado" placeholder="Nome do homenageado">
+      <input type="number" id="idadeHomenageado" placeholder="Idade (se aplicável)">
+      <div class="navegacao">
+        <button onclick="voltarTela(4)">Voltar</button>
+        <button onclick="proximaTela(6)">Próximo</button>
+      </div>
+    </section>
+
+    <section id="tela6" class="tela">
+      <h2>Adicionais</h2>
+      <label><input type="checkbox" value="Bolo"> Bolo</label>
+      <label><input type="checkbox" value="Docinhos"> Docinhos</label>
+      <label><input type="checkbox" value="Cupcakes"> Cupcakes</label>
+      <label><input type="checkbox" value="Topper de Bolo"> Topper de Bolo</label>
+
+      <div class="navegacao">
+        <button onclick="voltarTela(5)">Voltar</button>
+        <button onclick="proximaTela(7)">Próximo</button>
+      </div>
+    </section>
+
+    <section id="tela7" class="tela">
+      <h2>Escolha a data</h2>
+      <input type="date" id="dataFesta">
+      <div class="navegacao">
+        <button onclick="voltarTela(6)">Voltar</button>
+        <button onclick="proximaTela(8)">Próximo</button>
+      </div>
+    </section>
+
+    <section id="tela8" class="tela">
+      <h2>Resumo do Pedido</h2>
+      <div id="resumo"></div>
+      <p>Escaneie o QR Code para pagar:</p>
+      <img src="qrcode.png" alt="QR Code de pagamento" width="200">
+      <button onclick="enviarWhatsApp()">Enviar pedido no WhatsApp</button>
+      <div class="navegacao">
+        <button onclick="voltarTela(7)">Voltar</button>
+      </div>
+    </section>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
