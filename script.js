@@ -1,7 +1,6 @@
 let telaAtual = 1;
 const totalTelas = 8;
 
-
 const temasPorFesta = {
   "Aniversário": ["Princesa", "Super Heróis", "Safari"],
   "15 Anos": ["Discoteca", "Prata", "Hollywood"],
@@ -9,29 +8,14 @@ const temasPorFesta = {
   "Mêsversário": ["Ursinhos", "Arco-íris", "Nuvens"]
 };
 
+// Atualiza barra de progresso e número de etapa
 function atualizarProgresso() {
-    const progress = ((telaAtual - 1) / (totalTelas - 1)) * 100;
-    document.getElementById("progress").style.width = progress + "%";
-    document.getElementById("etapaAtual").innerText = `Etapa ${telaAtual} de ${totalTelas}`;
+  document.getElementById("progress").style.width = ((telaAtual - 1) / (totalTelas - 1)) * 100 + "%";
+  const etapa = document.getElementById("etapaAtual");
+  if (etapa) etapa.textContent = `Tela ${telaAtual} de ${totalTelas}`;
 }
 
-function validarTela(tela) {
-    if (tela === 2 && !document.getElementById("nomeCliente").value.trim()) {
-        alert("Digite seu nome para continuar.");
-        return false;
-    }
-    if (tela === 3 && !document.querySelector('input[name="tipoFesta"]:checked')) {
-        alert("Selecione um tipo de festa.");
-        return false;
-    }
-    return true;
-}
-
-function proximaTela(n) {
-    if (!validarTela(telaAtual)) return;
-    // resto do código...
-}
-
+// Avança para a próxima tela
 function proximaTela(n) {
   document.getElementById(`tela${telaAtual}`).classList.remove("ativa");
   telaAtual = n;
@@ -42,6 +26,7 @@ function proximaTela(n) {
   if (telaAtual === 8) gerarResumo();
 }
 
+// Volta para a tela anterior
 function voltarTela(n) {
   document.getElementById(`tela${telaAtual}`).classList.remove("ativa");
   telaAtual = n;
@@ -49,6 +34,7 @@ function voltarTela(n) {
   atualizarProgresso();
 }
 
+// Carrega temas na Tela 3
 function carregarTemas() {
   const tipoSelecionado = document.querySelector('input[name="tipoFesta"]:checked');
   const listaDiv = document.getElementById("listaTemas");
@@ -62,15 +48,22 @@ function carregarTemas() {
   const temas = temasPorFesta[tipoSelecionado.value] || [];
   temas.forEach(tema => {
     const label = document.createElement("label");
-    label.innerHTML = `<input type="radio" name="temaFesta" value="${tema}"> ${tema}`;
+    label.textContent = tema;
+    label.onclick = () => {
+      document.getElementById("pesquisaTema").value = tema;
+      listaDiv.style.display = "none"; // fecha lista ao selecionar
+    };
     listaDiv.appendChild(label);
   });
 }
 
+// Mostra a lista de temas ao clicar no input
 function mostrarTemas() {
-  document.getElementById("listaTemas").classList.remove("hidden");
+  const lista = document.getElementById("listaTemas");
+  lista.style.display = "block";
 }
 
+// Filtra os temas conforme a digitação
 function filtrarTemas() {
   const termo = document.getElementById("pesquisaTema").value.toLowerCase();
   document.querySelectorAll("#listaTemas label").forEach(label => {
@@ -78,13 +71,22 @@ function filtrarTemas() {
   });
 }
 
+// Fecha lista se clicar fora do select customizado
+document.addEventListener("click", function(e) {
+  const container = document.querySelector(".select-busca");
+  if (!container.contains(e.target)) {
+    document.getElementById("listaTemas").style.display = "none";
+  }
+});
+
+// Gera resumo do pedido na Tela 8
 function gerarResumo() {
-  const nome = document.getElementById("nomeCliente").value.trim();
+  const nome = document.getElementById("nomeCliente").value;
   const tipo = document.querySelector('input[name="tipoFesta"]:checked')?.value || "";
-  const tema = document.querySelector('input[name="temaFesta"]:checked')?.value || "";
+  const tema = document.getElementById("pesquisaTema").value || "";
   const combo = document.querySelector('input[name="combo"]:checked')?.value || "";
   const semMesa = document.getElementById("semMesa").checked ? "Sim" : "Não";
-  const homenageado = document.getElementById("nomeHomenageado").value.trim();
+  const homenageado = document.getElementById("nomeHomenageado").value;
   const idade = document.getElementById("idadeHomenageado").value;
   const data = document.getElementById("dataFesta").value;
 
@@ -103,18 +105,15 @@ function gerarResumo() {
   `;
 }
 
+// Envia resumo pelo WhatsApp
 function enviarWhatsApp() {
-  gerarResumo(); // atualiza o resumo antes de enviar
-
   const resumo = document.getElementById("resumo").innerText.trim();
   if (!resumo) {
     alert("O resumo do pedido está vazio!");
     return;
   }
 
-  const numero = "5521977153453"; // número do WhatsApp no formato internacional
+  const numero = "5521977153453"; // seu número
   const url = `https://wa.me/${numero}?text=${encodeURIComponent(resumo)}`;
-
-  // abre em nova aba
-  window.open(url, "_blank");
+  window.location.href = url; // abre o WhatsApp diretamente
 }

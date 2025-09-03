@@ -48,17 +48,20 @@
     </section>
 
     <!-- Tela 3 -->
-    <section id="tela3" class="tela">
-       <img src="assets/logo_horizontal.svg" alt="Logo Encantiva">
-      <h2>Escolha o tema</h2>
-      <input type="text" id="pesquisaTema" class="input-padrao" placeholder="Pesquisar tema..." onfocus="mostrarTemas()" oninput="filtrarTemas()">
-      <div id="listaTemas" class="hidden"></div>
+  <section id="tela3" class="tela">
+  <img src="assets/logo_horizontal.svg" alt="Logo Encantiva">
+  <h2>Escolha o tema</h2>
+  
+  <div class="select-busca">
+    <input type="text" id="pesquisaTema" class="input-padrao" placeholder="Pesquisar tema..." onclick="mostrarTemas()" oninput="filtrarTemas()">
+    <div id="listaTemas" class="hidden"></div>
+  </div>
 
-      <div class="buttons">
-        <button class="btn btn-primary" onclick="proximaTela(4)">Próximo</button>
-        <button class="btn btn-secondary" onclick="voltarTela(2)">Voltar</button>
-      </div>
-    </section>
+  <div class="buttons">
+    <button class="btn btn-primary" onclick="proximaTela(4)">Próximo</button>
+    <button class="btn btn-secondary" onclick="voltarTela(2)">Voltar</button>
+  </div>
+</section>
 
     <!-- Tela 4 -->
     <section id="tela4" class="tela">

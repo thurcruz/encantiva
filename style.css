@@ -87,23 +87,31 @@ body {
 }
 
 /* Lista de temas */
-#listaTemas {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.select-busca {
+  position: relative;
+  width: 100%;
 }
-#listaTemas.hidden {
+
+#listaTemas {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 10;
   display: none;
 }
+
 #listaTemas label {
-  background: #fff;
-  padding: 10px 14px;
-  border-radius: 16px;
-  border: 1px solid #ddd;
+  display: block;
+  padding: 10px;
   cursor: pointer;
-  transition: 0.2s;
 }
+
 #listaTemas label:hover {
-  border-color: #90f;
+  background: #f0f0f0;
 }
