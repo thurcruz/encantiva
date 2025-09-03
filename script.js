@@ -1,12 +1,12 @@
 let telaAtual = 1;
 const totalTelas = 8;
+let temasPorFesta = {};
 
-const temasPorFesta = {
-  "Aniversário": ["Princesa", "Super Heróis", "Safari"],
-  "15 Anos": ["Discoteca", "Prata", "Hollywood"],
-  "Bodas": ["Dourado", "Prata", "Clássico"],
-  "Mêsversário": ["Ursinhos", "Arco-íris", "Nuvens"]
-};
+fetch('temas.json')
+  .then(res => res.json())
+  .then(data => {
+    temasPorFesta = data;
+  })
 
 // Atualiza barra de progresso e número de etapa
 function atualizarProgresso() {
