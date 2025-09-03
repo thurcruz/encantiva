@@ -1,6 +1,7 @@
 let telaAtual = 1;
 const totalTelas = 8;
 
+
 const temasPorFesta = {
   "Aniversário": ["Princesa", "Super Heróis", "Safari"],
   "15 Anos": ["Discoteca", "Prata", "Hollywood"],
@@ -9,7 +10,26 @@ const temasPorFesta = {
 };
 
 function atualizarProgresso() {
-  document.getElementById("progress").style.width = ((telaAtual - 1) / (totalTelas - 1)) * 100 + "%";
+    const progress = ((telaAtual - 1) / (totalTelas - 1)) * 100;
+    document.getElementById("progress").style.width = progress + "%";
+    document.getElementById("etapaAtual").innerText = `Etapa ${telaAtual} de ${totalTelas}`;
+}
+
+function validarTela(tela) {
+    if (tela === 2 && !document.getElementById("nomeCliente").value.trim()) {
+        alert("Digite seu nome para continuar.");
+        return false;
+    }
+    if (tela === 3 && !document.querySelector('input[name="tipoFesta"]:checked')) {
+        alert("Selecione um tipo de festa.");
+        return false;
+    }
+    return true;
+}
+
+function proximaTela(n) {
+    if (!validarTela(telaAtual)) return;
+    // resto do código...
 }
 
 function proximaTela(n) {
