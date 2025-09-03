@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Encantiva</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 </head>
 <body>
   <!-- Barra de progresso -->
@@ -21,6 +25,7 @@
       <p>Clique em “Vamos começar“ e monte sua festa em minutos.</p>
       <div class="buttons">
         <button class="btn btn-primary" onclick="proximaTela(2)">Vamos começar</button>
+        <button class="btn btn-secondary" onclick="window.location.href='tutorial.html'">Veja com funciona</button>
       </div>
     </section>
 
@@ -117,9 +122,9 @@
       <div id="resumo"></div>
       <p>Escaneie o QR Code para pagar:</p>
       <img src="qrcode.png" alt="QR Code de pagamento" width="200">
-      <button class="btn btn-primary" onclick="enviarWhatsApp()">Enviar no WhatsApp</button>
-
+     
       <div class="buttons">
+         <button class="btn btn-primary" onclick="enviarWhatsApp()">Enviar no WhatsApp</button>
         <button class="btn btn-secondary" onclick="voltarTela(7)">Voltar</button>
       </div>
     </section>

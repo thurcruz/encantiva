@@ -79,12 +79,12 @@ function filtrarTemas() {
 }
 
 function gerarResumo() {
-  const nome = document.getElementById("nomeCliente").value;
+  const nome = document.getElementById("nomeCliente").value.trim();
   const tipo = document.querySelector('input[name="tipoFesta"]:checked')?.value || "";
   const tema = document.querySelector('input[name="temaFesta"]:checked')?.value || "";
   const combo = document.querySelector('input[name="combo"]:checked')?.value || "";
   const semMesa = document.getElementById("semMesa").checked ? "Sim" : "Não";
-  const homenageado = document.getElementById("nomeHomenageado").value;
+  const homenageado = document.getElementById("nomeHomenageado").value.trim();
   const idade = document.getElementById("idadeHomenageado").value;
   const data = document.getElementById("dataFesta").value;
 
@@ -104,8 +104,17 @@ function gerarResumo() {
 }
 
 function enviarWhatsApp() {
-  const resumo = document.getElementById("resumo").innerText;
-  const numero = "5521977153453"; // coloque aqui o número do WhatsApp
+  gerarResumo(); // atualiza o resumo antes de enviar
+
+  const resumo = document.getElementById("resumo").innerText.trim();
+  if (!resumo) {
+    alert("O resumo do pedido está vazio!");
+    return;
+  }
+
+  const numero = "5521977153453"; // número do WhatsApp no formato internacional
   const url = `https://wa.me/${numero}?text=${encodeURIComponent(resumo)}`;
+
+  // abre em nova aba
   window.open(url, "_blank");
 }
