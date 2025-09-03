@@ -1,87 +1,95 @@
-:root {
-  --color-primary: #ff33cc;
-  --color-secondary: #9900ff;
-  --color-dark: #2b0a2f;
-  --font-main: 'Inter', sans-serif;
-}
-
 body {
   font-family: Arial, sans-serif;
-  background: #f9f9fb;
   margin: 0;
-  padding: 0;
-}
-
-#app {
-  max-width: 500px;
-  margin: auto;
   padding: 20px;
+  background: #f9f9f9;
 }
 
 .tela {
   display: none;
-  opacity: 0;
-  transform: translateX(50px);
-  transition: all 0.4s ease;
 }
-
 .tela.ativa {
   display: block;
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.navegacao {
-  
-  display: flex;
-  justify-content: space-between;
-}
-
-.buttons {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
- margin-top: 20px;
-}
-
-.btn {
-  padding: 14px;
-  border-radius: 32px;
-  font-weight: 600;
-  cursor: pointer;
-  width: 100%;
-  border: none;
-}
-
-.btn-primary {
-  background: var(--color-primary);
-  color: #fff;
-}
-
-.btn-secondary {
-  background: #fff;
-  border: 1px solid var(--color-primary);
-  color: var(--color-primary);
-}
-
-button:hover {
-  background: #7a28cc;
 }
 
 /* Barra de progresso */
-#progress-container {
+.progress-bar {
   width: 100%;
-  height: 8px;
+  height: 6px;
   background: #ddd;
   margin-bottom: 20px;
-  border-radius: 4px;
+  border-radius: 3px;
   overflow: hidden;
 }
-
-#progress-bar {
-  width: 0;
+#progress {
   height: 100%;
-  background: #9933ff;
-  transition: width 0.3s;
+  width: 0%;
+  background: #90f;
+  transition: width 0.3s ease;
+}
+
+/* Botões */
+.buttons {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.btn {
+  width: 100%;
+  height: 48px;
+  border-radius: 32px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary {
+  background: #f3c;
+  color: white;
+}
+.btn-secondary {
+  background: transparent;
+  border: 1px solid #f3c;
+  color: #f3c;
+}
+
+/* Campos de entrada */
+.input-padrao {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 12px;
+  border: 1px solid #f3c;
+  border-radius: 32px;
+  font-size: 16px;
+  box-sizing: border-box;
+  background: #fff;
+  outline: none;
+  transition: 0.2s;
+}
+.input-padrao:focus {
+  border-color: #90f;
+  box-shadow: 0 0 6px rgba(153, 0, 255, 0.3);
+}
+
+/* Lista de temas */
+#listaTemas {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+#listaTemas.hidden {
+  display: none;
+}
+#listaTemas label {
+  background: #fff;
+  padding: 10px 14px;
+  border-radius: 16px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  transition: 0.2s;
+}
+#listaTemas label:hover {
+  border-color: #90f;
 }
