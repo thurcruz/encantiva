@@ -8,9 +8,11 @@ body {
 
 .tela {
   display: none;
+  flex-direction: column;
+  
 }
 .tela.ativa {
-  display: block;
+  display: flex;
 }
 
 .tela img {
@@ -19,6 +21,12 @@ body {
     padding: 32px;      
 }
 
+
+#tela1 {
+ align-items: center;
+ text-align: center;
+ justify-content: center; 
+}
 
 /* Barra de progresso */
 .progress-bar {
@@ -29,6 +37,7 @@ body {
   border-radius: 3px;
   overflow: hidden;
 }
+
 #progress {
   height: 100%;
   width: 0%;
