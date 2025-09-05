@@ -59,7 +59,7 @@ body {
 
 .btn {
     width: 100%;         
-    height: 48px;
+    height: 56px;
     border-radius: 32px;
     font-weight: 600;
     border: none;
@@ -80,6 +80,7 @@ body {
 .input-padrao {
   display: block;
   width: 100%;
+  height: 56px;
   padding: 14px;
   margin-bottom: 12px;
   border: 1px solid #f3c;
