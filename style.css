@@ -5,6 +5,14 @@ body {
   background: #f9f9f9;
 }
 
+/* Títulos e parágrafos */
+h2 {
+  color: #90f;
+}
+p {
+  color: #f3c;
+}
+
 
 .tela {
   display: none;
@@ -26,6 +34,51 @@ body {
  align-items: center;
  text-align: center;
  justify-content: center; 
+}
+
+#tela2 label {
+  display: flex;
+  align-items: center;
+  gap: 12px;            /* espaço entre círculo e texto */
+  cursor: pointer;
+  margin: 8px 0;
+  user-select: none;
+}
+
+/* estiliza o input direto (remove aparência nativa) */
+#tela2 input[type="radio"]{
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #90f; /* contorno roxo */
+  background: transparent;
+  flex: 0 0 auto;
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* estado checado: preenchimento rosa + borda rosa */
+#tela2 input[type="radio"]:checked{
+  background: #f3c;
+  border-color: #90f;
+  /* leve glow para indicar seleção (opcional) */
+  box-shadow: 0 0 0 6px rgba(255,47,166,0.09);
+}
+
+/* foco acessível */
+#tela2 input[type="radio"]:focus{
+  outline: none;
+  box-shadow: 0 0 0 6px rgba(106,0,204,0.12);
+}
+
+/* garante que o texto das labels herde a cor padrão desejada */
+#tela2 label, 
+#tela2 label * {
+  color: inherit;
+  font-size: 16px;
 }
 
 /* Barra de progresso */
