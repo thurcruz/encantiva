@@ -1,16 +1,21 @@
 body {
   font-family:'Inter', sans-serif;
   margin: 0;
+  
   padding: 20px;
   background: #f9f9f9;
+  padding-bottom: 80px;
 }
 
 /* Títulos e parágrafos */
 h2 {
   color: #90f;
+  font-weight: 700;
+    margin-bottom: 0px;
 }
 p {
   color: #f3c;
+  font-weight: 500;
 }
 
 
@@ -101,13 +106,15 @@ p {
 /* Botões */
 .buttons {
     position: fixed;
-    bottom: 20px;
+    bottom: 0px;
     left: 50%;
     transform: translateX(-50%);
-    width: 90%;          
+    width: 90%;    
+    padding: 20px;      
     display: flex;
     flex-direction: column;  
-    gap: 12px;           
+    gap: 12px;     
+    background-color: #f9f9f9;      
 }
 
 .btn {
