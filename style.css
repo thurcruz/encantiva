@@ -118,6 +118,11 @@ p {
   transition: width 0.3s ease;
 }
 
+.erro {
+  color: red;
+  font-size: 14px;
+}
+
 /* Botões */
 .buttons {
     position: fixed;

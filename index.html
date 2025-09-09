@@ -43,15 +43,18 @@
       <p>Selecione o tipo de festa:</p>
       <div class="grid-radios">
       <label><input type="radio" name="tipoFesta" value="Aniversário"> Aniversário</label>
-      <label><input type="radio" name="tipoFesta" value="XV Anos"> 15 Anos</label>
+      <label><input type="radio" name="tipoFesta" value="XV Anos"> XV Anos</label>
       <label><input type="radio" name="tipoFesta" value="Bodas"> Bodas</label>
       <label><input type="radio" name="tipoFesta" value="Mêsversário"> Mêsversário</label>
       <label><input type="radio" name="tipoFesta" value="Chá de Bebê"> Chá de Bebê</label>
       <label><input type="radio" name="tipoFesta" value="Chá de Panela"> Chá de Panela</label>
       <label><input type="radio" name="tipoFesta" value="Noivado"> Noivado</label>
       <label><input type="radio" name="tipoFesta" value="Chá Revelação"> Chá Revelação</label>
+      <label><input type="radio" name="tipoFesta" value="Batizado"> Batizado</label>
+      <label><input type="radio" name="tipoFesta" value="Outro"> Outro</label>
       </div>
       <div class="buttons">
+        <p id="erroTela2" class="erro" style="display:none;"></p>
         <button class="btn btn-primary" onclick="proximaTela(3)">Próximo</button>
         <button class="btn btn-secondary" onclick="voltarTela(1)">Voltar</button>
       </div>
@@ -66,9 +69,16 @@
   <div class="select-busca">
     <input type="text" id="pesquisaTema" class="input-padrao" placeholder="Pesquisar tema..." onclick="mostrarTemas()" oninput="filtrarTemas()">
     <div id="listaTemas" class="hidden"></div>
+
+  <label>
+    <input type="checkbox" id="temaOutro" onchange="ativarTemaOutro()"> Outro
+  </label>
+  
+  <input type="text" id="novoTema" class="input-padrao" placeholder="Digite seu tema" style="display:none;">
   </div>
 
   <div class="buttons">
+    <p id="erroTela3" class="erro" style="display:none;"></p>
     <button class="btn btn-primary" onclick="proximaTela(4)">Próximo</button>
     <button class="btn btn-secondary" onclick="voltarTela(2)">Voltar</button>
   </div>
@@ -85,6 +95,7 @@
       <label><input type="checkbox" id="semMesa"> Sem mesa</label>
 
       <div class="buttons">
+        <p id="erroTela4" class="erro" style="display:none;"></p>
         <button class="btn btn-primary" onclick="proximaTela(5)">Próximo</button>
         <button class="btn btn-secondary" onclick="voltarTela(3)">Voltar</button>
       </div>
@@ -99,6 +110,7 @@
       <input type="number" id="idadeHomenageado" class="input-padrao" placeholder="Idade (se aplicável)">
 
       <div class="buttons">
+        <p id="erroTela5" class="erro" style="display:none;"></p>
         <button class="btn btn-primary" onclick="proximaTela(6)">Próximo</button>
         <button class="btn btn-secondary" onclick="voltarTela(4)">Voltar</button>
       </div>
@@ -114,6 +126,7 @@
       <label><input type="checkbox" value="Topper de Bolo"> Topper de Bolo</label>
 
       <div class="buttons">
+        <p id="erroTela6" class="erro" style="display:none;"></p>
         <button class="btn btn-primary" onclick="proximaTela(7)">Próximo</button>
         <button class="btn btn-secondary" onclick="voltarTela(5)">Voltar</button>
       </div>
@@ -127,6 +140,7 @@
       <input type="date" id="dataFesta" class="input-padrao">
 
       <div class="buttons">
+        <p id="erroTela7" class="erro" style="display:none;"></p>
         <button class="btn btn-primary" onclick="proximaTela(8)">Próximo</button>
         <button class="btn btn-secondary" onclick="voltarTela(6)">Voltar</button>
       </div>

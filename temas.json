@@ -21,5 +21,11 @@
   ["Azul", "Verde"],
   
   "Chá Revelação": 
+  ["Azul e Roxo", "Azul e Rosa", "Branco"],
+
+  "Batizado": 
+  ["Azul e Roxo", "Azul e Rosa", "Branco"],
+
+  "Outro": 
   ["Azul e Roxo", "Azul e Rosa", "Branco"]
 }
