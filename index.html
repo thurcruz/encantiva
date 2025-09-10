@@ -23,9 +23,11 @@
       <img src="assets/logo_horizontal.svg" alt="Logo Encantiva">
       <h2>Seja bem-vindo</h2>
       <p>Clique em <strong>“Vamos começar“</strong> e monte sua festa em minutos.</p>
-      <div class="buttons">
+      <div class="buttons_home">
         <button class="btn btn-primary" onclick="proximaTela(2)">Vamos começar</button>
         <button class="btn btn-secondary" onclick="window.location.href='tutorial.html'">Veja com funciona</button>
+        <button class="btn btn-secondary" onclick="window.location.href='catalogo.html'">Acesse nosso catalogo</button>
+        <button class="btn btn-secondary" onclick="window.open('https://wa.me/5521988466576', '_blank')">Fale com a gente!</button>
       </div>
     </section>
 
@@ -71,7 +73,7 @@
     <div id="listaTemas" class="hidden"></div>
 
   <label>
-    <input type="checkbox" id="temaOutro" onchange="ativarTemaOutro()"> Não achou o seu tema?
+    <input type="checkbox" class="label-temaOutro" id="temaOutro" onchange="ativarTemaOutro()"> Não achou o seu tema?
   </label>
   
   <input type="text" id="novoTema" class="input-padrao" placeholder="Digite seu tema" style="display:none;">
