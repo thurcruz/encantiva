@@ -24,6 +24,7 @@ p {
 .tela {
   display: none;
   flex-direction: column;
+  padding-bottom: 120px; /* cria espaço para os botões fixos */
 }
 
 .tela.ativa {
@@ -206,16 +207,22 @@ p {
   position: relative;
 }
 
-#tela2 input[type="radio"]:checked {
-  background: #f3c;
-  border-color: #90f;
-  box-shadow: 0 0 0 6px rgba(255,47,166,0.09);
+
+
+#tela2 input[type="radio"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;   /* ajuste menor que o tamanho total para criar margem */
+  height: 12px;
+  border-radius: 50%;
+  background: #f3c; /* rosa */
+  box-sizing: border-box;
 }
 
-#tela2 input[type="radio"]:focus {
-  outline: none;
-  box-shadow: 0 0 0 6px rgba(106,0,204,0.12);
-}
+
 
 /* ----------------------------- */
 /* Tela 3 - Lista de temas       */
@@ -291,7 +298,7 @@ p {
 
 #temaOutro:checked {
   background: #f3c;
-  border-color: #90f;
+  border-color: #9900ff;
 }
 
 #temaOutro:checked::after {
@@ -316,56 +323,140 @@ p {
 /* ----------------------------- */
 /* Tela 4 - Combo e sem mesa     */
 /* ----------------------------- */
-#tela4 label {
+/* ----------------------------- */
+/* Tela 4 - Combo e sem mesa     */
+/* ----------------------------- */
+
+/* Container dos cards */
+.cards-combos {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  padding: 20px;
+  scroll-behavior: smooth;
+  margin-bottom: 10px;
+}
+
+/* Esconde a barra de rolagem no Chrome/Safari */
+.cards-combos::-webkit-scrollbar {
+  display: none;
+}
+
+/* Cards individuais */
+.card-combo {
+  flex: 0 0 220px;
+  border: 2px solid #ccc;
+  border-radius: 16px;
+  padding: 15px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s, background-color 0.2s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-combo:hover {
+  transform: scale(1.05);
+}
+
+.card-combo.selecionado {
+  border-color: #6f42c1;
+  background-color: #f8f3ff;
+}
+
+/* Título centralizado */
+.card-combo h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  text-align: center;
+  color: #6f42c1;
+  font-weight: 700;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #eee;
+}
+
+/* Itens do combo */
+.card-combo .itens {
+  flex: 1;
+  margin: 10px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Separador antes do valor */
+.card-combo .valor {
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 2px solid #eee;
+  color: #f3c;
+}
+
+/* Container do switch com labels */
+.switch-container {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
-  cursor: pointer;
-  margin: 8px 0;
+  margin-bottom: 20px;
 }
 
-#tela4 input[type="radio"] {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 2px solid #90f;
-  background: transparent;
+.switch-container span {
+  font-weight: 600;
+  color: #6a0dad;
+  font-size: 14px;
 }
 
-#tela4 input[type="radio"]:checked {
-  background: #f3c;
-  border-color: #90f;
-}
-
-#tela4 input[type="checkbox"] {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #90f;
-  border-radius: 4px;
-  background: transparent;
-  cursor: pointer;
+/* Switch já existente */
+#switch {
   position: relative;
+  width: 72px;
+  height: 36px;
 }
 
-#tela4 input[type="checkbox"]:checked {
-  background: #f3c;
-  border-color: #90f;
+#switch span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #6a0dad;
+  border: 4px solid #6a0dad;
+  border-radius: 9999px;
 }
 
-#tela4 input[type="checkbox"]:checked::after {
-  content: "";
+#switch button {
+  width: 36px;
+  height: 36px;
+  background: #d292ff;
+  border:  2px solid #6a0dad;
+  border-radius: 50%;
   position: absolute;
-  top: 1px;
-  left: 5px;
-  width: 4px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
+  top: 60%;
+  left: 10%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  transition: left 0.3s, background-color 0.3s, border-color 0.3s;
+}
+
+#switch.active button {
+  left: 50%;
+  background-color: #f3c;
+
+}
+
+#switch button:hover {
+  outline: 4px solid rgba(106,13,173,0.2);
+}
+
+/* Valor total */
+#valorTotal {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
 }
 
 /* ----------------------------- */

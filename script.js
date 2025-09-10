@@ -189,6 +189,68 @@ function ativarTemaOutro() {
   }
 }
 
+// -----------------------------
+// Tela 4 - Combos e Cards
+// -----------------------------
+// Dados dos combos
+const combos = [
+  { nome: "Combo 1", itens: ["Item A", "Item B"], valor: 50 },
+  { nome: "Combo 2", itens: ["Item C", "Item D"], valor: 70 },
+  { nome: "Combo 3", itens: ["Item E", "Item F"], valor: 90 }
+];
+
+let mesaAtivada = false;
+let comboSelecionado = null;
+
+// Função para gerar os cards
+function gerarCards() {
+  const container = document.getElementById('cardsCombos');
+  container.innerHTML = '';
+  combos.forEach((combo, index) => {
+    const card = document.createElement('div');
+    card.classList.add('card-combo');
+    card.innerHTML = `
+      <h3>${combo.nome}</h3>
+      ${combo.itens.map(item => `<p>${item}</p>`).join('')}
+      <p>R$ ${combo.valor.toFixed(2)}</p>
+    `;
+    card.onclick = () => selecionarCombo(index);
+    container.appendChild(card);
+  });
+}
+
+// Seleciona um combo
+function selecionarCombo(index) {
+  comboSelecionado = index;
+  document.querySelectorAll('.card-combo').forEach((card, i) => {
+    card.classList.toggle('selecionado', i === index);
+  });
+  atualizarValorTotal();
+}
+
+// Toggle da mesa
+function toggleMesa() {
+  mesaAtivada = !mesaAtivada;
+  const switchDiv = document.getElementById('switch');
+  switchDiv.classList.toggle('active');
+  atualizarValorTotal();
+}
+
+// Atualiza o valor total
+function atualizarValorTotal() {
+  let total = 0;
+  if (comboSelecionado !== null) {
+    total += combos[comboSelecionado].valor;
+  }
+  if (mesaAtivada) {
+    total += 10; // valor da mesa ajustado
+  }
+  document.getElementById('valorTotal').textContent = `Total: R$ ${total.toFixed(2)}`;
+}
+
+// Inicializa cards
+gerarCards();
+
 // Gera resumo do pedido na Tela 8
 function gerarResumo() {
   const nome = document.getElementById("nomeCliente")?.value || "";

@@ -98,21 +98,37 @@
 
 
     <!-- Tela 4 -->
-    <section id="tela4" class="tela">
-       <img src="assets/logo_horizontal.svg" alt="Logo Encantiva">
-      <h2>Escolha o combo desejado!</h2>
-      <p>Selecione de acordo com a sua preferência</p>
-      <label><input type="radio" name="combo" value="Essencial"> Essencial</label>
-      <label><input type="radio" name="combo" value="Fantástico"> Fantástico</label>
-      <label><input type="radio" name="combo" value="Inesquecível"> Inesquecível</label>
-      <label><input type="checkbox" id="semMesa"> Sem mesa</label>
+ 
+<section id="tela4" class="tela">
+  <img src="assets/logo_horizontal.svg" alt="Logo Encantiva">
+  <h2>Escolha seu combo</h2>
+  <p>Veja os temas disponíveis:</p>
+  <!-- Container dos cards -->
+  <div class="cards-combos" id="cardsCombos">
+    <!-- Cards serão gerados via JS -->
+  </div>
 
-      <div class="buttons">
-        <p id="erroTela4" class="erro" style="display:none;"></p>
-        <button class="btn btn-primary" onclick="proximaTela(5)">Próximo</button>
-        <button class="btn btn-secondary" onclick="voltarTela(3)">Voltar</button>
-      </div>
-    </section>
+  <!-- Switch para adicionar mesa com labels -->
+  <div class="switch-container">
+    <span class="label-esq">Sem mesa</span>
+    <div id="switch" onclick="toggleMesa()">
+      <button></button>
+      <span></span>
+    </div>
+    <span class="label-dir">Com mesa +10 reais</span>
+  </div>
+
+  <!-- Valor total -->
+  <div id="valorTotal">Total: R$ 0,00</div>
+
+  <!-- Botões de navegação -->
+  <div class="buttons">
+    <button class="btn btn-secondary" onclick="voltarTela(3)">Voltar</button>
+    <button class="btn btn-primary" onclick="proximaTela(5)">Próximo</button>
+  </div>
+</section>
+
+
 
     <!-- Tela 5 -->
     <section id="tela5" class="tela">
