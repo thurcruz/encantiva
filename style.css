@@ -1,18 +1,20 @@
+/* ----------------------------- */
+/* Globais                       */
+/* ----------------------------- */
 body {
   font-family:'Inter', sans-serif;
   margin: 0;
-  
   padding: 20px;
   background: #f9f9f9;
   padding-bottom: 80px;
 }
 
-/* Títulos e parágrafos */
 h2 {
   color: #90f;
-  font-weight: 700;
-    margin-bottom: 0px;
+  font-weight: 900;
+  margin-bottom: 0px;
 }
+
 p {
   color: #f3c;
   font-weight: 500;
@@ -22,145 +24,21 @@ p {
 .tela {
   display: none;
   flex-direction: column;
-  
 }
+
 .tela.ativa {
   display: flex;
 }
 
 .tela img {
-    display: block;        
-    margin: auto; 
-    padding: 32px;      
+  display: block;        
+  margin: auto; 
+  padding: 32px;      
 }
 
-
-#tela1 {
- align-items: center;
- text-align: center;
- justify-content: center; 
-}
-
-#tela2 label {
-  display: flex;
-  align-items: center;
-  gap: 12px;            /* espaço entre círculo e texto */
-  cursor: pointer;
-  margin: 8px 0;
-  user-select: none;
-}
-
-/* estiliza o input direto (remove aparência nativa) */
-#tela2 input[type="radio"]{
-  -webkit-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 2px solid #90f; /* contorno roxo */
-  background: transparent;
-  flex: 0 0 auto;
-  cursor: pointer;
-  position: relative;
-  box-sizing: border-box;
-}
-
-/* estado checado: preenchimento rosa + borda rosa */
-#tela2 input[type="radio"]:checked{
-  background: #f3c;
-  border-color: #90f;
-  /* leve glow para indicar seleção (opcional) */
-  box-shadow: 0 0 0 6px rgba(255,47,166,0.09);
-}
-
-/* foco acessível */
-#tela2 input[type="radio"]:focus{
-  outline: none;
-  box-shadow: 0 0 0 6px rgba(106,0,204,0.12);
-}
-
-/* garante que o texto das labels herde a cor padrão desejada */
-#tela2 label, 
-#tela2 label * {
-  color: inherit;
-  font-size: 16px;
-}
-
-/* Esconde o checkbox nativo */
-input[type="checkbox"] {
-  -webkit-appearance: none;
-  appearance: none;
-  margin: 10px;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #90f; /* borda roxa */
-  border-radius: 4px; /* quadrado levemente arredondado */
-  background: transparent;
-  cursor: pointer;
-  position: relative;
-  flex: 0 0 auto;
-  box-sizing: border-box;
-}
-
-/* Checkbox marcado */
-input[type="checkbox"]:checked {
-  background: #f3c; /* preenchimento rosa */
-  border-color: #90f;
-}
-
-/* Pequeno efeito de "check" */
-input[type="checkbox"]:checked::after {
-  content: "";
-  position: absolute;
-  top: 1px;
-  left: 5px;
-  width: 4px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-}
-
-/* Foco acessível */
-input[type="checkbox"]:focus {
-  outline: none;
-  box-shadow: 0 0 0 6px rgba(153,0,255,0.2);
-}
-
-/* Label do checkbox */
-label {
-  display: flex;
-  align-items: center;
-
-  cursor: pointer;
-  user-select: none;
-  font-size: 16px;
-  font-weight: 400;
-  color: #90f;
-}
-
-.input-temaOutro {
-  font-weight: 600;
-  color: #ff00cc;
-}
-
-
-.grid-radios {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* duas colunas */
-  gap: 0px 50px; /* espaçamento vertical e horizontal */
-  max-width: 500px; /* opcional, controla largura */
-  margin: 0 auto;   /* centraliza */
-}
-
-.grid-radios label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 16px;
-}
-
-/* Barra de progresso */
+/* ----------------------------- */
+/* Barra de progresso            */
+/* ----------------------------- */
 .progress-bar {
   width: 100%;
   height: 6px;
@@ -168,6 +46,7 @@ label {
   margin-bottom: 20px;
   border-radius: 3px;
   overflow: hidden;
+  position: relative;
 }
 
 #progress {
@@ -177,7 +56,17 @@ label {
   transition: width 0.3s ease;
 }
 
-/* Notificação fixa no topo */
+#etapaAtual {
+  position: absolute;
+  right: 10px;
+  top: -22px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* ----------------------------- */
+/* Notificação                   */
+/* ----------------------------- */
 .notificacao {
   position: fixed;
   top: -100px;
@@ -194,83 +83,66 @@ label {
   transition: top 0.4s ease;
   z-index: 1000;
   width: 80%;
-  
   display: flex;
   align-items: center;
-  justify-content: center; /* centraliza ícone + texto */
-  gap: 8px; /* espaço entre ícone e texto */
- 
+  justify-content: center;
+  gap: 12px;
 }
 
-.notificacao::before {
-  content: "";
-  background-size: contain;
-  flex-shrink: 0;
+.notificacao.ativa {
+  top: 20px;
 }
 
 .notificacao .icone {
   width: 20px;
   height: 20px;
   flex-shrink: 0;
-  
 }
 
-/* Quando visível */
-.notificacao.ativa {
-  top: 20px; /* desce suavemente */
-}
-
-
-.erro {
-  color: red;
-  font-size: 14px;
-}
-
-/* Botões */
-.buttons_home {
-  width: 90%;
-  max-width: 400px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 48px;
-}
-
-.buttons {
-    position: fixed;
-    bottom: 0px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;    
-    padding: 20px;      
-    display: flex;
-    flex-direction: column;  
-    gap: 12px;     
-    background-color: #f9f9f9;      
-}
-
+/* ----------------------------- */
+/* Botões globais                */
+/* ----------------------------- */
 .btn {
-    width: 100%;         
-    height: 56px;
-    border-radius: 32px;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
+  width: 100%;         
+  height: 56px;
+  border-radius: 32px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
 }
 
 .btn-primary {
   background: #f3c;
   color: white;
 }
+
 .btn-secondary {
   background: transparent;
   border: 1px solid #f3c;
   color: #f3c;
 }
 
+.buttons_home, .buttons {
+  width: 90%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
 
+.buttons {
+  position: fixed;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 20px;      
+  background-color: #f9f9f9;  
+}
 
-/* Campos de entrada */
+/* ----------------------------- */
+/* Campos de entrada             */
+/* ----------------------------- */
 .input-padrao {
   display: block;
   width: 100%;
@@ -285,37 +157,255 @@ label {
   outline: none;
   transition: 0.2s;
 }
+
 .input-padrao:focus {
   border-color: #90f;
   box-shadow: 0 0 6px rgba(153, 0, 255, 0.3);
 }
 
-/* Lista de temas */
-.select-busca {
-  position: relative;
-  width: 100%;
+/* ----------------------------- */
+/* Tela 1                        */
+/* ----------------------------- */
+#tela1 {
+  align-items: center;
+  text-align: center;
+  justify-content: center; 
 }
 
-#listaTemas {
+/* ----------------------------- */
+/* Tela 2 - Tipos de festa       */
+/* ----------------------------- */
+#tela2 label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  margin: 8px 0;
+  user-select: none;
+  color: #90f;
+  font-size: 16px;
+}
+
+.grid-radios {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0px 50px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+#tela2 input[type="radio"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #90f;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+}
+
+#tela2 input[type="radio"]:checked {
+  background: #f3c;
+  border-color: #90f;
+  box-shadow: 0 0 0 6px rgba(255,47,166,0.09);
+}
+
+#tela2 input[type="radio"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 6px rgba(106,0,204,0.12);
+}
+
+/* ----------------------------- */
+/* Tela 3 - Lista de temas       */
+/* ----------------------------- */
+/* Título "Outro?" */
+.select-busca h2 {
+  margin-top: 24px;
+  margin-bottom: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #90f;
+}
+
+/* Checkbox "não achou seu tema" */
+.label-temaOutro {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ff00cc;
+  cursor: pointer;
+  margin-bottom: 8px; /* espaçamento com o input novo tema */
+}
+
+#temaOutro {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #90f;
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+}
+
+#temaOutro:checked {
+  background: #f3c;
+  border-color: #90f;
+}
+
+#temaOutro:checked::after {
+  content: "";
   position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
+  top: 1px;
+  left: 5px;
+  width: 4px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Input tema outro */
+#novoTema {
+  display: none; /* mantido pelo JS */
+  margin-top: 8px;
+}
+
+
+/* ----------------------------- */
+/* Tela 4 - Combo e sem mesa     */
+/* ----------------------------- */
+#tela4 label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  margin: 8px 0;
+}
+
+#tela4 input[type="radio"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #90f;
+  background: transparent;
+}
+
+#tela4 input[type="radio"]:checked {
+  background: #f3c;
+  border-color: #90f;
+}
+
+#tela4 input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #90f;
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+}
+
+#tela4 input[type="checkbox"]:checked {
+  background: #f3c;
+  border-color: #90f;
+}
+
+#tela4 input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 5px;
+  width: 4px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* ----------------------------- */
+/* Tela 5 - Homenageado          */
+/* ----------------------------- */
+#tela5 input[type="text"], #tela5 input[type="number"] {
+  margin-bottom: 12px;
+}
+
+/* ----------------------------- */
+/* Tela 6 - Adicionais           */
+/* ----------------------------- */
+#tela6 label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  margin: 8px 0;
+}
+
+#tela6 input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #90f;
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+}
+
+#tela6 input[type="checkbox"]:checked {
+  background: #f3c;
+  border-color: #90f;
+}
+
+#tela6 input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 5px;
+  width: 4px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* ----------------------------- */
+/* Tela 7 - Data do evento       */
+/* ----------------------------- */
+#tela7 input[type="date"] {
+  width: 100%;
+  height: 56px;
+  padding: 14px;
+  border: 1px solid #f3c;
+  border-radius: 32px;
+  font-size: 16px;
+  outline: none;
+}
+
+/* ----------------------------- */
+/* Tela 8 - Resumo do pedido     */
+/* ----------------------------- */
+#resumo {
   background: #fff;
   border: 1px solid #ddd;
-  border-radius: 8px;
-  max-height: 200px;
-  overflow-y: auto;
-  z-index: 10;
-  display: none;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 20px;
 }
 
-#listaTemas label {
+/* Centraliza QR Code */
+#tela8 img {
   display: block;
-  padding: 10px;
-  cursor: pointer;
-}
-
-#listaTemas label:hover {
-  background: #f0f0f0;
+  margin: 16px auto;
 }
