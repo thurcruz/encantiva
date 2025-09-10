@@ -17,12 +17,18 @@ function atualizarProgresso() {
 }
 
 // Mostra mensagem de erro na tela
+// Exibe notificação no topo
 function exibirErro(mensagem) {
-  const erroElemento = document.getElementById(`erroTela${telaAtual}`);
-  if (erroElemento) {
-    erroElemento.textContent = mensagem;
-    erroElemento.style.display = "block";
-  }
+  const notificacao = document.getElementById("notificacao");
+  const mensagemErro = document.getElementById("mensagemErro");
+
+  mensagemErro.textContent = mensagem;
+  notificacao.classList.add("ativa");
+
+  // Fecha automaticamente após 3s
+  setTimeout(() => {
+    notificacao.classList.remove("ativa");
+  }, 3000);
 }
 
 // Limpa a mensagem de erro

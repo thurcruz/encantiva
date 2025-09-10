@@ -177,6 +177,50 @@ label {
   transition: width 0.3s ease;
 }
 
+/* Notificação fixa no topo */
+.notificacao {
+  position: fixed;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffdcdc;
+  color: rgb(245, 12, 51);
+  padding: 16px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  border: 2px solid #f50c33;
+  box-shadow: 0 4px 12px rgba(252, 24, 24, 0.15);
+  transition: top 0.4s ease;
+  z-index: 1000;
+  width: 80%;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center; /* centraliza ícone + texto */
+  gap: 8px; /* espaço entre ícone e texto */
+ 
+}
+
+.notificacao::before {
+  content: "";
+  background-size: contain;
+  flex-shrink: 0;
+}
+
+.notificacao .icone {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  
+}
+
+/* Quando visível */
+.notificacao.ativa {
+  top: 20px; /* desce suavemente */
+}
+
+
 .erro {
   color: red;
   font-size: 14px;
@@ -223,6 +267,8 @@ label {
   border: 1px solid #f3c;
   color: #f3c;
 }
+
+
 
 /* Campos de entrada */
 .input-padrao {
