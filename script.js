@@ -1,23 +1,45 @@
+// ==========================================
+// Variáveis globais
+// ==========================================
 let telaAtual = 1;
-const totalTelas = 8;
+const totalTelas = 9; // atualizado até a tela 9
 let temasPorFesta = {};
+let mesaAtivada = false;
+let comboSelecionado = null;
 
-// Carrega temas do JSON
+// Combos disponíveis (Tela 4)
+const combos = [
+  { nome: "Combo 1", itens: ["Item A", "Item B"], valor: 50 },
+  { nome: "Combo 2", itens: ["Item C", "Item D"], valor: 70 },
+  { nome: "Combo 3", itens: ["Item E", "Item F"], valor: 90 }
+];
+
+// ==========================================
+// Carregamento inicial
+// ==========================================
 fetch('temas.json')
   .then(res => res.json())
   .then(data => {
     temasPorFesta = data;
   });
 
-// Atualiza barra de progresso e número de etapa
+// Inicializa Tela 4 com os cards
+document.addEventListener("DOMContentLoaded", gerarCards);
+
+// ==========================================
+// Barra de progresso
+// ==========================================
 function atualizarProgresso() {
-  document.getElementById("progress").style.width = ((telaAtual - 1) / (totalTelas - 1)) * 100 + "%";
+  document.getElementById("progress").style.width =
+    ((telaAtual - 1) / (totalTelas - 1)) * 100 + "%";
+
   const etapa = document.getElementById("etapaAtual");
   if (etapa) etapa.textContent = `Tela ${telaAtual} de ${totalTelas}`;
 }
 
-// Mostra mensagem de erro na tela
-// Exibe notificação no topo
+// ==========================================
+// Notificações de erro
+// ==========================================
 function exibirErro(mensagem) {
   const notificacao = document.getElementById("notificacao");
   const mensagemErro = document.getElementById("mensagemErro");
@@ -25,13 +47,11 @@ function exibirErro(mensagem) {
   mensagemErro.textContent = mensagem;
   notificacao.classList.add("ativa");
 
-  // Fecha automaticamente após 3s
   setTimeout(() => {
     notificacao.classList.remove("ativa");
   }, 3000);
 }
 
-// Limpa a mensagem de erro
 function limparErro() {
   const erroElemento = document.getElementById(`erroTela${telaAtual}`);
   if (erroElemento) {
@@ -40,77 +60,86 @@ function limparErro() {
   }
 }
 
-// Validação de cada tela
+// ==========================================
+// Validação de telas
+// ==========================================
 function validarTelaAtual() {
-  // Limpa mensagem apenas se não for tela 1 ou 8
-  if (telaAtual !== 1 && telaAtual !== 8) limparErro();
+  if (telaAtual !== 1 && telaAtual !== 8 && telaAtual !== 9) limparErro();
 
   switch (telaAtual) {
     case 1:
-      return true; // Tela 1 não precisa validar
+      return true;
     case 2:
-      const tipo = document.querySelector('input[name="tipoFesta"]:checked');
-      if (!tipo) {
-        if (telaAtual !== 1 && telaAtual !== 8) exibirErro("Selecione o tipo de festa para continuar.");
-        return false;
-      }
-      return true;
+      return !!document.querySelector('input[name="tipoFesta"]:checked') ||
+        (exibirErro("Selecione o tipo de festa para continuar."), false);
     case 3:
-      const inputTema = document.getElementById("pesquisaTema");
-      const temaOutro = document.getElementById("temaOutro").checked;
-      const novoTema = document.getElementById("novoTema").value.trim();
-      const tipoSelecionado = document.querySelector('input[name="tipoFesta"]:checked')?.value;
-      const temasDisponiveis = temasPorFesta[tipoSelecionado] || [];
-
-      if (temaOutro) {
-        if (!novoTema) {
-          if (telaAtual !== 1 && telaAtual !== 8) exibirErro("Digite o tema personalizado.");
-          return false;
-        }
-      } else {
-        if (!inputTema.value || !temasDisponiveis.includes(inputTema.value)) {
-          if (telaAtual !== 1 && telaAtual !== 8) exibirErro("Selecione um tema válido da lista ou marque 'Outro'.");
-          return false;
-        }
-      }
-      return true;
+      return validarTema();
     case 4:
-      const combo = document.querySelector('input[name="combo"]:checked');
-      if (!combo) {
-        if (telaAtual !== 1 && telaAtual !== 8) exibirErro("Escolha um combo para continuar.");
-        return false;
-      }
-      return true;
+      return comboSelecionado !== null ||
+        (exibirErro("Escolha um combo para continuar."), false);
     case 5:
-      const homenageado = document.getElementById("nomeHomenageado").value.trim();
-      if (!homenageado) {
-        if (telaAtual !== 1 && telaAtual !== 8) exibirErro("Informe o nome do homenageado.");
-        return false;
-      }
-      return true;
+      return validarHomenageado();
     case 6:
-      return true; // Adicionais são opcionais
-    case 7:
-      const data = document.getElementById("dataFesta").value;
-      if (!data) {
-        if (telaAtual !== 1 && telaAtual !== 8) exibirErro("Escolha a data do evento.");
-        return false;
-      }
       return true;
+    case 7:
+      return validarData();
     case 8:
-      return true; // Tela 8 não precisa validar
+    case 9:
+      return true;
     default:
       return true;
   }
 }
 
-// Avança para a próxima tela
+function validarTema() {
+  const inputTema = document.getElementById("pesquisaTema");
+  const temaOutro = document.getElementById("temaOutro").checked;
+  const novoTema = document.getElementById("novoTema").value.trim();
+  const tipoSelecionado = document.querySelector('input[name="tipoFesta"]:checked')?.value;
+  const temasDisponiveis = temasPorFesta[tipoSelecionado] || [];
+
+  if (temaOutro) {
+    if (!novoTema) {
+      exibirErro("Digite o tema personalizado.");
+      return false;
+    }
+  } else {
+    if (!inputTema.value || !temasDisponiveis.includes(inputTema.value)) {
+      exibirErro("Selecione um tema válido da lista ou marque 'Outro'.");
+      return false;
+    }
+  }
+  return true;
+}
+
+function validarHomenageado() {
+  const homenageado = document.getElementById("nomeHomenageado").value.trim();
+  if (!homenageado) {
+    exibirErro("Informe o nome do homenageado.");
+    return false;
+  }
+  return true;
+}
+
+function validarData() {
+  const data = document.getElementById("dataFesta").value;
+  if (!data) {
+    exibirErro("Escolha a data do evento.");
+    return false;
+  }
+  return true;
+}
+
+// ==========================================
+// Navegação entre telas
+// ==========================================
 function proximaTela(n) {
-  if (!validarTelaAtual()) return; // impede avanço se não passar na validação
+  if (!validarTelaAtual()) return;
 
   document.getElementById(`tela${telaAtual}`).classList.remove("ativa");
   telaAtual = n;
   document.getElementById(`tela${telaAtual}`).classList.add("ativa");
+
   limparErro();
   atualizarProgresso();
 
@@ -118,16 +147,18 @@ function proximaTela(n) {
   if (telaAtual === 8) gerarResumo();
 }
 
-// Volta para a tela anterior
 function voltarTela(n) {
   document.getElementById(`tela${telaAtual}`).classList.remove("ativa");
   telaAtual = n;
   document.getElementById(`tela${telaAtual}`).classList.add("ativa");
+
   limparErro();
   atualizarProgresso();
 }
 
-// Carrega temas na Tela 3
+// ==========================================
+// Tela 3 - Temas
+// ==========================================
 function carregarTemas() {
   const tipoSelecionado = document.querySelector('input[name="tipoFesta"]:checked');
   const listaDiv = document.getElementById("listaTemas");
@@ -138,26 +169,23 @@ function carregarTemas() {
     return;
   }
 
-  const temas = temasPorFesta[tipoSelecionado.value] || [];
-  temas.forEach(tema => {
+  (temasPorFesta[tipoSelecionado.value] || []).forEach(tema => {
     const label = document.createElement("label");
     label.textContent = tema;
     label.onclick = () => {
       document.getElementById("pesquisaTema").value = tema;
-      listaDiv.style.display = "none"; // fecha lista ao selecionar
+      listaDiv.style.display = "none";
     };
     listaDiv.appendChild(label);
   });
 }
 
-// Mostra a lista de temas ao clicar no input
 function mostrarTemas() {
   if (!document.getElementById("temaOutro").checked) {
     document.getElementById("listaTemas").style.display = "block";
   }
 }
 
-// Filtra os temas conforme a digitação
 function filtrarTemas() {
   const termo = document.getElementById("pesquisaTema").value.toLowerCase();
   document.querySelectorAll("#listaTemas label").forEach(label => {
@@ -165,15 +193,13 @@ function filtrarTemas() {
   });
 }
 
-// Fecha lista se clicar fora do select customizado
-document.addEventListener("click", function(e) {
+document.addEventListener("click", e => {
   const container = document.querySelector(".select-busca");
   if (!container.contains(e.target)) {
     document.getElementById("listaTemas").style.display = "none";
   }
 });
 
-// Ativa/desativa campo "Outro" na tela 3
 function ativarTemaOutro() {
   const checkbox = document.getElementById("temaOutro");
   const novoTema = document.getElementById("novoTema");
@@ -189,22 +215,13 @@ function ativarTemaOutro() {
   }
 }
 
-// -----------------------------
-// Tela 4 - Combos e Cards
-// -----------------------------
-// Dados dos combos
-const combos = [
-  { nome: "Combo 1", itens: ["Item A", "Item B"], valor: 50 },
-  { nome: "Combo 2", itens: ["Item C", "Item D"], valor: 70 },
-  { nome: "Combo 3", itens: ["Item E", "Item F"], valor: 90 }
-];
-
-let mesaAtivada = false;
-let comboSelecionado = null;
-
-// Função para gerar os cards
+// ==========================================
+// Tela 4 - Combos e mesa
+// ==========================================
 function gerarCards() {
   const container = document.getElementById('cardsCombos');
+  if (!container) return;
+
   container.innerHTML = '';
   combos.forEach((combo, index) => {
     const card = document.createElement('div');
@@ -212,14 +229,14 @@ function gerarCards() {
     card.innerHTML = `
       <h3>${combo.nome}</h3>
       ${combo.itens.map(item => `<p>${item}</p>`).join('')}
-      <p>R$ ${combo.valor.toFixed(2)}</p>
+      <hr>
+      <p><b>R$ ${combo.valor.toFixed(2)}</b></p>
     `;
     card.onclick = () => selecionarCombo(index);
     container.appendChild(card);
   });
 }
 
-// Seleciona um combo
 function selecionarCombo(index) {
   comboSelecionado = index;
   document.querySelectorAll('.card-combo').forEach((card, i) => {
@@ -228,65 +245,53 @@ function selecionarCombo(index) {
   atualizarValorTotal();
 }
 
-// Toggle da mesa
 function toggleMesa() {
   mesaAtivada = !mesaAtivada;
-  const switchDiv = document.getElementById('switch');
-  switchDiv.classList.toggle('active');
+  document.getElementById('switch').classList.toggle('active', mesaAtivada);
   atualizarValorTotal();
 }
 
-// Atualiza o valor total
 function atualizarValorTotal() {
-  let total = 0;
-  if (comboSelecionado !== null) {
-    total += combos[comboSelecionado].valor;
-  }
-  if (mesaAtivada) {
-    total += 10; // valor da mesa ajustado
-  }
+  let total = comboSelecionado !== null ? combos[comboSelecionado].valor : 0;
+  if (mesaAtivada) total += 10;
   document.getElementById('valorTotal').textContent = `Total: R$ ${total.toFixed(2)}`;
 }
 
-// Inicializa cards
-gerarCards();
-
-// Gera resumo do pedido na Tela 8
+// ==========================================
+// Tela 8 - Resumo
+// ==========================================
 function gerarResumo() {
   const nome = document.getElementById("nomeCliente")?.value || "";
   const tipo = document.querySelector('input[name="tipoFesta"]:checked')?.value || "";
-  const temaOutro = document.getElementById("temaOutro").checked;
+  const temaOutro = document.getElementById("temaOutro")?.checked;
   const tema = temaOutro ? document.getElementById("novoTema").value : document.getElementById("pesquisaTema").value;
-  const combo = document.querySelector('input[name="combo"]:checked')?.value || "";
-  const semMesa = document.getElementById("semMesa").checked ? "Sim" : "Não";
-  const homenageado = document.getElementById("nomeHomenageado").value;
-  const idade = document.getElementById("idadeHomenageado").value;
-  const data = document.getElementById("dataFesta").value;
+  const homenageado = document.getElementById("nomeHomenageado")?.value || "";
+  const idade = document.getElementById("idadeHomenageado")?.value || "";
+  const data = document.getElementById("dataFesta")?.value || "";
 
   const adicionais = Array.from(document.querySelectorAll('#tela6 input[type="checkbox"]:checked'))
     .map(a => a.value)
     .join(", ") || "Nenhum";
 
+  const comboInfo = comboSelecionado !== null ? combos[comboSelecionado].nome : "Nenhum";
+  const mesaInfo = mesaAtivada ? "Com mesa (+R$10)" : "Sem mesa";
+
   document.getElementById("resumo").innerHTML = `
     <p><b>Cliente:</b> ${nome}</p>
     <p><b>Tipo:</b> ${tipo}</p>
     <p><b>Tema:</b> ${tema}</p>
-    <p><b>Combo:</b> ${combo} (Sem mesa: ${semMesa})</p>
+    <p><b>Combo:</b> ${comboInfo} - ${mesaInfo}</p>
     <p><b>Homenageado:</b> ${homenageado} ${idade ? `(${idade} anos)` : ""}</p>
     <p><b>Adicionais:</b> ${adicionais}</p>
     <p><b>Data:</b> ${data}</p>
   `;
 }
 
-// Envia resumo pelo WhatsApp
 function enviarWhatsApp() {
   const resumo = document.getElementById("resumo").innerText.trim();
-  if (!resumo) {
-    // Mensagem de erro na tela 8 não aparece
-    return;
-  }
+  if (!resumo) return;
 
-  const numero = "5521977153453"; // seu número
+  const numero = "5521960147831"; // seu número
   const url = `https://wa.me/${numero}?text=${encodeURIComponent(resumo)}`;
   window.location.href = url;
 }
