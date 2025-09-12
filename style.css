@@ -591,34 +591,57 @@ p {
   width: 92%;
   align-items: center;
   background: #ffe6f5; /* rosa claro */
-  padding: 12px 12px;
+  padding: 12px;
   border: 1px solid var(--color-pink);
   border-radius: 12px;
-  gap: 0px; /* espaço mínimo entre elementos */
 }
 
-/* Info do lado esquerdo (ícone + texto) */
+@media (min-width: 600px) {
+.mesa-container {
+  width: 100%;
+}
+}
+
+/* Info do lado esquerdo (label + descrição) */
 .mesa-info {
   display: flex;
-  align-items: center; /* centraliza verticalmente */
-  gap: 0px; /* distância reduzida entre ícone e texto */
+  flex-direction: column; /* empilha label e desc */
+  align-items: flex-start; /* alinha à esquerda */
+  gap: 12 px; /* distância mínima entre label e descrição */
+  width: 60%;
 }
 
-/* Ícone da mesa */
-.mesa-icon {
-  width: 24px;
-  height: auto;
-  object-fit: contain;
-  display: block;
+@media (min-width: 500px) {
+.mesa-info {
+  display: flex;
+  flex-direction: column; /* empilha label e desc */
+  align-items: flex-start; /* alinha à esquerda */
+  gap: 2 px; /* distância mínima entre label e descrição */
+}
 }
 
-/* Texto do lado do ícone */
+
+
+/* Label principal */
 #mesa-label {
   font-weight: 800;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1;
   color: #140033;
+  margin: 0;
+  padding: 2px 0px;
 }
+
+/* Descrição */
+#desc-mesa {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1;
+  color: #140033;
+  margin: 0;
+  padding: 2px 0px;
+}
+
 
 /* Switch customizado */
 #switch {
@@ -662,36 +685,12 @@ p {
 @media (min-width: 481px) {
   .mesa-container {
     width: 75%;
-    padding: 0 20px;
+    padding: 12px 12px;
     gap: 20px;
   }
 
   .mesa-info {
     gap: 24px;
-  }
-
-  .mesa-icon {
-    width: 24px;
-    height: 24px;
-  }
-
-  #mesa-label {
-    font-size: 14px;
-  }
-
-  #switch {
-    width: 72px;
-    height: 36px;
-  }
-
-  #switch button {
-    width: 36px;
-    height: 36px;
-    left: 6px;
-  }
-
-  #switch.active button {
-    left: 34px;
   }
 }
 

@@ -4,7 +4,7 @@
 let telaAtual = 1;
 const totalTelas = 9; // atualizado até a tela 9
 let temasPorFesta = {};
-let mesaAtivada = false;
+let mesaAtivada = true;
 let comboSelecionado = null;
 
 // Combos disponíveis (Tela 4)
@@ -220,12 +220,13 @@ function ativarTemaOutro() {
 // ==========================================
 function scrollCards(direction) {
   const container = document.getElementById("cardsCombos");
-  const scrollAmount = 250;
+  const scrollAmount = 250; // quantos px rola por clique
   container.scrollBy({
     left: direction * scrollAmount,
     behavior: 'smooth'
   });
 }
+
 
 function gerarCards() {
   const container = document.getElementById('cardsCombos');
@@ -254,20 +255,28 @@ function selecionarCombo(index) {
   atualizarValorTotal();
 }
 
-
 function toggleMesa() {
-  mesaAtivada = !mesaAtivada;
-  const switchEl = document.getElementById('switch');
-  const labelEl = document.getElementById('mesa-label');
+    mesaAtivada = !mesaAtivada;
+    const switchEl = document.getElementById('switch');
+    const label = document.getElementById('mesa-label');
 
-  switchEl.classList.toggle('active', mesaAtivada);
-  labelEl.textContent = mesaAtivada 
-    ? "Mesa adicionada (+R$10)" 
-    : "Adicionar mesa (+R$10)";
+    switchEl.classList.toggle('active', mesaAtivada);
+    label.textContent = mesaAtivada ? "Mesa adicionada (+R$10)" : "Adicionar mesa (+R$10)";
 
-  atualizarValorTotal();
+    atualizarValorTotal();
 }
 
+// Função para ativar a mesa por padrão ao carregar a tela
+function inicializarMesa() {
+    const switchEl = document.getElementById('switch');
+    const label = document.getElementById('mesa-label');
+
+    switchEl.classList.add('active');
+    label.textContent = "Mesa adicionada (+R$10)";
+}
+
+// Chama a inicialização quando a tela carregar
+window.addEventListener('DOMContentLoaded', inicializarMesa);
 
 function atualizarValorTotal() {
   let total = comboSelecionado !== null ? combos[comboSelecionado].valor : 0;
