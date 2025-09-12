@@ -254,11 +254,20 @@ function selecionarCombo(index) {
   atualizarValorTotal();
 }
 
+
 function toggleMesa() {
   mesaAtivada = !mesaAtivada;
-  document.getElementById('switch').classList.toggle('active', mesaAtivada);
+  const switchEl = document.getElementById('switch');
+  const labelEl = document.getElementById('mesa-label');
+
+  switchEl.classList.toggle('active', mesaAtivada);
+  labelEl.textContent = mesaAtivada 
+    ? "Mesa adicionada (+R$10)" 
+    : "Adicionar mesa (+R$10)";
+
   atualizarValorTotal();
 }
+
 
 function atualizarValorTotal() {
   let total = comboSelecionado !== null ? combos[comboSelecionado].valor : 0;

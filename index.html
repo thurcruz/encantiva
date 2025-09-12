@@ -95,6 +95,18 @@
   <h2>Escolha seu combo</h2>
   <p>Selecione de acordo com a sua preferência:</p>
 
+   <div class="mesa-container">
+  <div class="mesa-info">
+    <img src="assets/mesa-redonda.png" alt="Ícone de mesa" class="mesa-icon">
+    <span id="mesa-label">Adicionar mesa (+R$10)</span>
+  </div>
+
+  <div id="switch" onclick="toggleMesa()">
+    <button></button>
+    <span></span>
+  </div>
+</div>
+
   <!-- Container dos cards -->
   <div class="cards-wrapper">
     <div class="cards-combos" id="cardsCombos">
@@ -110,15 +122,6 @@
     <button class="scroll-btn" id="scroll-right" onclick="scrollCards(1)">
       <img src="assets/right-arrow.svg" alt="Direita">
     </button>
-  </div>
-
-  <div class="switch-container">
-    <span class="label-esq">Sem mesa</span>
-    <div id="switch" onclick="toggleMesa()">
-      <button></button>
-      <span></span>
-    </div>
-    <span class="label-dir">Com mesa +10 reais</span>
   </div>
 
   <div id="valorTotal">Total: R$ 0,00</div>
