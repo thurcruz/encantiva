@@ -2,7 +2,7 @@
 /* Variáveis globais             */
 /* ----------------------------- */
 :root {
-  --color-bg: #fcf7ff;
+  --color-bg: #fefcff;
   --color-white: #fff;
   --color-black: #000;
 
@@ -496,6 +496,7 @@ p {
   justify-content: space-between;
   gap: 16px;
   width: 100%;
+  
 }
 
 .cards-combos {
@@ -503,7 +504,7 @@ p {
   overflow-x: auto;
   gap: 20px;
   scroll-behavior: smooth;
-  padding: 20px 0;
+  padding: 20px 0 0 0;
   width: 100%;
   justify-content: flex-start;
 }
@@ -519,11 +520,12 @@ p {
   padding: 15px;
   background-color: white;
   cursor: pointer;
-  transition: transform 0.2s, border-color 0.2s, background-color 0.2s;
+
   display: flex;
   flex-direction: column;
   gap: 0px;
   justify-content: space-between;
+  
 }
 
 .card-combo:hover {
@@ -531,8 +533,8 @@ p {
 }
 
 .card-combo.selecionado {
-  border-color: var(--color-purple);
-  background-color: var(--color-purple-light);
+  border-color: rgb(203, 126, 255);
+  background-color: var(--color-purple);
   box-shadow: 0 0 15px 1px rgba(128, 0, 255, 0.4); /* brilho roxo */
 }
 
@@ -546,6 +548,16 @@ p {
   border-bottom: 2px solid var(--color-border-light);
 }
 
+.card-combo.selecionado h3 {
+  color: var(--color-white); /* título fica branco */
+  border-bottom: 2px solid var(--color-purple-dark);
+  
+}
+
+.card-combo.selecionado .combo-itens h4,
+.card-combo.selecionado .combo-itens p {
+  color: var(--color-white); /* itens mudam de cor */
+}
 
 .card-combo .combo-itens h4 {
   margin: 4px 4px; /* ajusta espaçamento entre itens */
@@ -564,6 +576,18 @@ p {
 }
 
 .card-combo .valor {
+  text-align: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 10px;
+  padding: 10px;
+border-radius: 50px;
+  border: solid 2px var(--color-purple);
+  color: var(--color-purple);
+}
+
+.card-combo.selecionado .valor {
   text-align: center;
   align-items: center;
   font-size: 16px;
@@ -601,8 +625,6 @@ border-radius: 50px;
   align-items: center;
   background: #fff0f9; /* rosa claro */
   padding: 12px;
-  border: 1px solid var(--color-pink);
-  border-radius: 12px;
 }
 
 @media (min-width: 600px) {
@@ -704,13 +726,34 @@ border-radius: 50px;
   }
 }
 
+.obs {
+  color: var(--color-border-dark);
+  text-align: center;
+  font-size: 14px;
+
+}
+
+.containerValorTotal {
+  display: flex;
+
+  border-top: 2px solid #e3dfff;
+  justify-content: space-around;
+}
+
 
    /* Valor total */
 #valorTotal {
-  text-align: center;
   font-size: 18px;
   font-weight: bold;
-  margin-top: 10px;
+  padding: 16px 0px;
+  color: #140033;
+}
+
+.Total{
+  font-size: 18px;
+  font-weight: bold;
+  padding: 16px 0px;
+  color:#140033;
 }
 
 /* ----------------------------- */

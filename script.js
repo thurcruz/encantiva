@@ -220,14 +220,25 @@ function atualizarValorTotal() {
     total += valor;
   }
   if (mesaAtivada) total += 10;
-  document.getElementById('valorTotal').textContent = `Total: R$ ${total.toFixed(2)}`;
+  document.getElementById('valorTotal').textContent = ` R$ ${total.toFixed(2)}`;
 }
 
 
 function selecionarCombo(index) {
-  comboSelecionado = index;
-  const cards = document.querySelectorAll('.card-combo');
-  cards.forEach((card, i) => card.classList.toggle('selecionado', i === index));
+  if (comboSelecionado === index) {
+    // Se clicar de novo no mesmo card → desseleciona
+    comboSelecionado = null;
+    document.querySelectorAll('.card-combo').forEach(card =>
+      card.classList.remove('selecionado')
+    );
+  } else {
+    // Seleciona o card clicado
+    comboSelecionado = index;
+    document.querySelectorAll('.card-combo').forEach((card, i) =>
+      card.classList.toggle('selecionado', i === index)
+    );
+  }
+
   atualizarValorTotal();
 }
 
@@ -283,19 +294,27 @@ function gerarResumo() {
     .map(a => a.value)
     .join(", ") || "Nenhum";
 
-  const comboInfo = comboSelecionado !== null ? combos[comboSelecionado].nome : "Nenhum";
+  let comboInfo = "Nenhum";
+  if (comboSelecionado !== null) {
+    const card = document.querySelectorAll('.card-combo')[comboSelecionado];
+    const nomeCombo = card.querySelector('.combo-nome').textContent;
+    const valorCombo = card.querySelector('.valor').textContent;
+    comboInfo = `${nomeCombo} (${valorCombo})`;
+  }
+
   const mesaInfo = mesaAtivada ? "Com mesa (+R$10)" : "Sem mesa";
 
   document.getElementById("resumo").innerHTML = `
     <p><b>Cliente:</b> ${nome}</p>
-    <p><b>Tipo:</b> ${tipo}</p>
+    <p>🎉<b>Tipo:</b> ${tipo}</p>
     <p><b>Tema:</b> ${tema}</p>
     <p><b>Combo:</b> ${comboInfo} - ${mesaInfo}</p>
     <p><b>Homenageado:</b> ${homenageado} ${idade ? `(${idade} anos)` : ""}</p>
     <p><b>Adicionais:</b> ${adicionais}</p>
-    <p><b>Data:</b> ${data}</p>
+    <p><b>📅Data:</b> ${data}</p>
   `;
 }
+
 
 function enviarWhatsApp() {
   const resumo = document.getElementById("resumo").innerText.trim();
