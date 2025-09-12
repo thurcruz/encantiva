@@ -278,8 +278,9 @@ function scrollCards(direction) {
   });
 }
 
-let mensagemWhatsAppGlobal = "";
-
+// ==========================================
+// Tela 8 - Resumo
+// ==========================================
 function gerarResumo() {
   const nome = document.getElementById("nomeCliente")?.value || "";
   const tipo = document.querySelector('input[name="tipoFesta"]:checked')?.value || "";
@@ -303,36 +304,26 @@ function gerarResumo() {
 
   const mesaInfo = mesaAtivada ? "Com mesa (+R$10)" : "Sem mesa";
 
-  // Resumo na tela
   document.getElementById("resumo").innerHTML = `
-    <p><b>Cliente:</b> ${nome}</p>
-    <p><b>Tipo:</b> ${tipo}</p>
-    <p><b>Tema:</b> ${tema}</p>
-    <p><b>Combo:</b> ${comboInfo} - ${mesaInfo}</p>
-    <p><b>Homenageado:</b> ${homenageado} ${idade ? `(${idade} anos)` : ""}</p>
-    <p><b>Adicionais:</b> ${adicionais}</p>
-    <p><b>Data:</b> ${data}</p>
+    
+   <p><br>Olá, aqui está o resumo do meu pedido:</br></p>
+   <p><br>==============================</br></p>
+    <p>- Cliente: ${nome}</p>
+    <p>- Ocasião: ${tipo}</p>
+    <p>- Tema: ${tema}</p>
+    <p>- Combo: ${comboInfo} - ${mesaInfo}</p>
+    <p>- Homenageado(s): ${homenageado} ${idade ? `(${idade} anos)` : ""}</p>
+    <p>- Adicionais: ${adicionais}</p>
+    <p>- Data de Retirada: ${data}</p>
   `;
-
-  // Mensagem global para WhatsApp (mantém UTF-8 e emojis)
-  mensagemWhatsAppGlobal =
-`✨ Aqui está o resumo do meu pedido ✨
-
-👤 Cliente: ${nome}
-🎉 Ocasião: ${tipo}
-🎨 Tema: ${tema}
-🎁 Pacote: ${comboInfo} - ${mesaInfo}
-🙌 Homenageado(s): ${homenageado} ${idade ? `(${idade} anos)` : ""}
-🪄 Adicionais: ${adicionais}
-📅 Data de Retirada: ${data}
-
-Por favor, confirme o recebimento e me avise sobre os próximos passos.`;
 }
 
-function enviarWhatsApp() {
-  if (!mensagemWhatsAppGlobal) return;
 
-  const numero = "5521960147831"; // número de destino
-  const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagemWhatsAppGlobal)}`;
-  window.open(url, "_blank"); // abre em nova aba
+function enviarWhatsApp() {
+  const resumo = document.getElementById("resumo").innerText.trim();
+  if (!resumo) return;
+
+  const numero = "5521960147831"; // seu número
+  const url = `https://wa.me/${numero}?text=${encodeURIComponent(resumo)}`
+  window.open(url, "_blank");
 }
