@@ -95,11 +95,10 @@
   <h2>Escolha seu combo</h2>
   <p>Selecione de acordo com a sua preferência:</p>
 
-   <div class="mesa-container">
+  <div class="mesa-container">
   <div class="mesa-info">
-  <!-- <img src="assets/mesa-redonda.png" alt="Ícone de mesa" class="mesa-icon"> -->
-  <span id="mesa-label">Adicionar mesa (+R$10)</span>
-   <span id="desc-mesa">Obs: Os valores do combo abaixo não inclui mesa! </span>
+    <span id="mesa-label">Adicionar mesa (+R$10)</span>
+    <span id="desc-mesa">Obs: Os valores do combo abaixo não inclui mesa!</span>
   </div>
 
   <div id="switch" onclick="toggleMesa()">
@@ -108,24 +107,60 @@
   </div>
 </div>
 
-  <!-- Container dos cards -->
-  <div class="cards-wrapper">
-    <div class="cards-combos" id="cardsCombos">
-      <!-- Cards gerados pelo JS -->
+<!-- Container dos cards -->
+<div class="cards-wrapper">
+  <div class="cards-combos" id="cardsCombos">
+    
+    <!-- Card Essencial -->
+    <div class="card-combo" id="combo-essencial" onclick="selecionarCombo(0)">
+      <h3 class="combo-nome">Essencial</h3>
+      <div class="combo-itens">
+        <h4 class="item">Inclui:</h4>
+        <p class="item">1 Mini painel red.</p>
+        <p class="item">1 Boleira</p>
+        <p class="item">3 Bandeijas</p>
+        <p class="item">1 Jarro c/ flores</p>
+        <p class="item">1 Toten</p>
+      </div>
+      <p class="valor" id="valor-essencial">R$ 29,90</p>
+    </div>
+
+    <!-- Card Fantástico -->
+    <div class="card-combo" id="combo-fantastico" onclick="selecionarCombo(1)">
+      <h3 class="combo-nome">Fantástico</h3>
+      <div class="combo-itens">
+        <h4 class="item">Inclui:</h4>
+      <p class="item">1 Mini painel red.</p>
+        <p class="item">1 Boleira</p>
+        <p class="item">3 Bandeijas</p>
+        <p class="item">1 Jarro c/ flores</p>
+        <p class="item">2 Toten</p>
+         <p class="item">1 Escada ou Bolas</p>
+      </div>
+      <p class="valor" id="valor-fantastico">R$ 59,90</p>
+    </div>
+
+    <!-- Card Inesquecível -->
+    <div class="card-combo" id="combo-inesquecivel" onclick="selecionarCombo(2)">
+      <h3 class="combo-nome">Inesquecível</h3>
+      <div class="combo-itens">
+        <h4 class="item">Inclui:</h4>
+        <p class="item">2 paineis red.</p>
+        <p class="item">1 Boleira</p>
+        <p class="item">5 Bandeijas</p>
+        <p class="item">2 Jarro c/ flores</p>
+        <p class="item">4 Toten</p>
+        <p class="item">1 Escada</p>
+        <p class="item">Mesa secundaria</p>
+        <p class="item">1 Escada ou Bolas</p>
+      </div>
+      <p class="valor" id="valor-inesquecivel">R$ 109,90</p>
     </div>
   </div>
+</div>
+<!-- Botões de scroll --> <div class="scroll-buttons"> <button class="scroll-btn" id="scroll-left" onclick="scrollCards(-1)"> <img src="assets/left-arrow.svg" alt="Esquerda"> </button> <button class="scroll-btn" id="scroll-right" onclick="scrollCards(1)"> <img src="assets/right-arrow.svg" alt="Direita"> </button> </div>
+<div id="valorTotal">Total: R$ 0,00</div>
 
-  <!-- Botões de scroll -->
-  <div class="scroll-buttons">
-    <button class="scroll-btn" id="scroll-left" onclick="scrollCards(-1)">
-      <img src="assets/left-arrow.svg" alt="Esquerda">
-    </button>
-    <button class="scroll-btn" id="scroll-right" onclick="scrollCards(1)">
-      <img src="assets/right-arrow.svg" alt="Direita">
-    </button>
-  </div>
-
-  <div id="valorTotal">Total: R$ 0,00</div>
 
   <div class="buttons">
     <button class="btn btn-primary" onclick="proximaTela(5)">Próximo</button>

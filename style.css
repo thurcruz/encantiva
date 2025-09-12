@@ -2,17 +2,17 @@
 /* Variáveis globais             */
 /* ----------------------------- */
 :root {
-  --color-bg: #f9f9f9;
+  --color-bg: #fcf7ff;
   --color-white: #fff;
   --color-black: #000;
 
   --color-purple: #90f;
   --color-pink: #f3c;
   --color-purple-dark: #6a0dad;
-  --color-purple-light: #d292ff;
+  --color-purple-light: #f6e9ff;
 
-  --color-border: #ccc;
-  --color-border-light: #ddd;
+  --color-border: #f3c;
+  --color-border-light: #ead3ff;
   --color-border-dark: #bbb;
 
   --shadow: 0 4px 10px rgba(0,0,0,0.05);
@@ -487,29 +487,94 @@ p {
 /* ----------------------------- */
 /* Tela 4 - Combos               */
 /* ----------------------------- */
-/* ----------------------------- */
-/* Tela 4 - Combos               */
-/* ----------------------------- */
 
 /* Container principal */
 .cards-wrapper {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* alinha tudo à esquerda */
+  align-items: flex-start;
+  justify-content: space-between;
   gap: 16px;
   width: 100%;
 }
 
-/* Lista de cards */
 .cards-combos {
   display: flex;
   overflow-x: auto;
-  gap: 20px;              /* espaçamento entre os cards */
+  gap: 20px;
   scroll-behavior: smooth;
   padding: 20px 0;
   width: 100%;
-  justify-content: flex-start; /* garante que os cards iniciem do lado esquerdo */
+  justify-content: flex-start;
 }
+
+.cards-combos::-webkit-scrollbar {
+  display: none;
+}
+
+.card-combo {
+  flex: 0 0 220px;
+  border: 2px solid var(--color-border-light);
+  border-radius: 16px;
+  padding: 15px;
+  background-color: white;
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s, background-color 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  justify-content: space-between;
+}
+
+.card-combo:hover {
+  transform: scale(1.05);
+}
+
+.card-combo.selecionado {
+  border-color: var(--color-purple);
+  background-color: var(--color-purple-light);
+  box-shadow: 0 0 15px 1px rgba(128, 0, 255, 0.4); /* brilho roxo */
+}
+
+.card-combo h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  text-align: center;
+  color: var(--color-purple);
+  font-weight: 700;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--color-border-light);
+}
+
+
+.card-combo .combo-itens h4 {
+  margin: 4px 4px; /* ajusta espaçamento entre itens */
+  font-size: 14px;
+  font-weight: 800;
+  color: #140033;
+  gap: 20px;
+}
+
+
+.card-combo .combo-itens p {
+  margin: 4px 4px; /* ajusta espaçamento entre itens */
+  font-size: 14px;
+  color: #140033;
+  gap: 20px;
+}
+
+.card-combo .valor {
+  text-align: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 10px;
+  padding: 10px;
+border-radius: 50px;
+  background-color:var(--color-purple-dark);
+  color: var(--color-white);
+}
+
 
 /* Desktop */
 @media (min-width: 500px) {
@@ -524,62 +589,6 @@ p {
   }
 }
 
-/* Esconde scrollbar no Webkit */
-.cards-combos::-webkit-scrollbar {
-  display: none;
-}
-
-/* Card individual */
-.card-combo {
-  flex: 0 0 220px;
-  border: 2px solid var(--color-border);
-  border-radius: 16px;
-  padding: 15px;
-  background-color: var(--color-white);
-  cursor: pointer;
-  transition: transform 0.2s, border-color 0.2s, background-color 0.2s;
-  box-shadow: var(--shadow);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.card-combo:hover {
-  transform: scale(1.05);
-}
-
-.card-combo.selecionado {
-  border-color: var(--color-purple-dark);
-  background-color: #f8f3ff;
-}
-
-.card-combo h3 {
-  margin: 0 0 10px 0;
-  font-size: 18px;
-  text-align: center;
-  color: var(--color-purple-dark);
-  font-weight: 700;
-  padding-bottom: 8px;
-  border-bottom: 2px solid var(--color-border-light);
-}
-
-.card-combo .itens {
-  flex: 1;
-  margin: 10px 0;
-  font-size: 14px;
-  color: var(--color-text);
-}
-
-.card-combo .valor {
-  text-align: center;
-  font-size: 16px;
-  font-weight: bold;
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 2px solid var(--color-border-light);
-  color: var(--color-pink);
-}
-
 /* ----------------------------- */
 /* Versão Mobile - padrão        */
 /* ----------------------------- */
@@ -590,7 +599,7 @@ p {
   justify-content: space-between;
   width: 92%;
   align-items: center;
-  background: #ffe6f5; /* rosa claro */
+  background: #fff0f9; /* rosa claro */
   padding: 12px;
   border: 1px solid var(--color-pink);
   border-radius: 12px;
@@ -671,6 +680,7 @@ p {
   left: 4px;
   transform: translateY(-50%);
   transition: left 0.3s, background-color 0.3s;
+  cursor: pointer;
 }
 
 /* Ativado */

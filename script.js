@@ -7,12 +7,6 @@ let temasPorFesta = {};
 let mesaAtivada = true;
 let comboSelecionado = null;
 
-// Combos disponíveis (Tela 4)
-const combos = [
-  { nome: "Combo 1", itens: ["Item A", "Item B"], valor: 50 },
-  { nome: "Combo 2", itens: ["Item C", "Item D"], valor: 70 },
-  { nome: "Combo 3", itens: ["Item E", "Item F"], valor: 90 }
-];
 
 // ==========================================
 // Carregamento inicial
@@ -23,8 +17,7 @@ fetch('temas.json')
     temasPorFesta = data;
   });
 
-// Inicializa Tela 4 com os cards
-document.addEventListener("DOMContentLoaded", gerarCards);
+
 
 // ==========================================
 // Barra de progresso
@@ -218,43 +211,28 @@ function ativarTemaOutro() {
 // ==========================================
 // Tela 4 - Combos e mesa
 // ==========================================
-function scrollCards(direction) {
-  const container = document.getElementById("cardsCombos");
-  const scrollAmount = 250; // quantos px rola por clique
-  container.scrollBy({
-    left: direction * scrollAmount,
-    behavior: 'smooth'
-  });
+
+function atualizarValorTotal() {
+  let total = 0;
+  if (comboSelecionado !== null) {
+    const card = document.querySelectorAll('.card-combo')[comboSelecionado];
+    const valor = parseFloat(card.querySelector('.valor').textContent.replace('R$', '').replace(',', '.'));
+    total += valor;
+  }
+  if (mesaAtivada) total += 10;
+  document.getElementById('valorTotal').textContent = `Total: R$ ${total.toFixed(2)}`;
 }
 
-
-function gerarCards() {
-  const container = document.getElementById('cardsCombos');
-  if (!container) return;
-
-  container.innerHTML = '';
-  combos.forEach((combo, index) => {
-    const card = document.createElement('div');
-    card.classList.add('card-combo');
-    card.innerHTML = `
-      <h3>${combo.nome}</h3>
-      ${combo.itens.map(item => `<p>${item}</p>`).join('')}
-      <hr>
-      <p><b>R$ ${combo.valor.toFixed(2)}</b></p>
-    `;
-    card.onclick = () => selecionarCombo(index);
-    container.appendChild(card);
-  });
-}
 
 function selecionarCombo(index) {
   comboSelecionado = index;
-  document.querySelectorAll('.card-combo').forEach((card, i) => {
-    card.classList.toggle('selecionado', i === index);
-  });
+  const cards = document.querySelectorAll('.card-combo');
+  cards.forEach((card, i) => card.classList.toggle('selecionado', i === index));
   atualizarValorTotal();
 }
 
+
+// Função para alternar o switch
 function toggleMesa() {
     mesaAtivada = !mesaAtivada;
     const switchEl = document.getElementById('switch');
@@ -273,15 +251,20 @@ function inicializarMesa() {
 
     switchEl.classList.add('active');
     label.textContent = "Mesa adicionada (+R$10)";
+
+    atualizarValorTotal();
 }
 
 // Chama a inicialização quando a tela carregar
 window.addEventListener('DOMContentLoaded', inicializarMesa);
 
-function atualizarValorTotal() {
-  let total = comboSelecionado !== null ? combos[comboSelecionado].valor : 0;
-  if (mesaAtivada) total += 10;
-  document.getElementById('valorTotal').textContent = `Total: R$ ${total.toFixed(2)}`;
+function scrollCards(direction) {
+  const container = document.getElementById("cardsCombos");
+  const scrollAmount = 250; // quantos px rola por clique
+  container.scrollBy({
+    left: direction * scrollAmount,
+    behavior: 'smooth'
+  });
 }
 
 // ==========================================
