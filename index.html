@@ -11,6 +11,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
+  <div class="imagem-fixa"></div>
+<div class="tela">
+  <!-- seu conteúdo principal aqui -->
+</div>
+
   <!-- Barra de progresso -->
   <div class="progress-bar">
     <div id="progress"></div>
@@ -84,27 +90,45 @@
     </section>
 
     <!-- Tela 4 -->
-    <section id="tela4" class="tela">
-      <img src="assets/logo_horizontal.svg" alt="Logo Encantiva">
-      <h2>Escolha seu combo</h2>
-      <div class="cards-combos" id="cardsCombos"></div>
+<section id="tela4" class="tela">
+  <img src="assets/logo_horizontal.svg" alt="Logo Encantiva">
+  <h2>Escolha seu combo</h2>
+  <p>Selecione de acordo com a sua preferência:</p>
 
-      <div class="switch-container">
-        <span class="label-esq">Sem mesa</span>
-        <div id="switch" onclick="toggleMesa()">
-          <button></button>
-          <span></span>
-        </div>
-        <span class="label-dir">Com mesa +10 reais</span>
-      </div>
+  <!-- Container dos cards -->
+  <div class="cards-wrapper">
+    <div class="cards-combos" id="cardsCombos">
+      <!-- Cards gerados pelo JS -->
+    </div>
+  </div>
 
-      <div id="valorTotal">Total: R$ 0,00</div>
+  <!-- Botões de scroll -->
+  <div class="scroll-buttons">
+    <button class="scroll-btn" id="scroll-left" onclick="scrollCards(-1)">
+      <img src="assets/left-arrow.svg" alt="Esquerda">
+    </button>
+    <button class="scroll-btn" id="scroll-right" onclick="scrollCards(1)">
+      <img src="assets/right-arrow.svg" alt="Direita">
+    </button>
+  </div>
 
-      <div class="buttons">
-        <button class="btn btn-primary" onclick="proximaTela(5)">Próximo</button>
-        <button class="btn btn-secondary" onclick="voltarTela(3)">Voltar</button>
-      </div>
-    </section>
+  <div class="switch-container">
+    <span class="label-esq">Sem mesa</span>
+    <div id="switch" onclick="toggleMesa()">
+      <button></button>
+      <span></span>
+    </div>
+    <span class="label-dir">Com mesa +10 reais</span>
+  </div>
+
+  <div id="valorTotal">Total: R$ 0,00</div>
+
+  <div class="buttons">
+    <button class="btn btn-primary" onclick="proximaTela(5)">Próximo</button>
+    <button class="btn btn-secondary" onclick="voltarTela(3)">Voltar</button>
+  </div>
+</section>
+
 
     <!-- Tela 5 -->
     <section id="tela5" class="tela">

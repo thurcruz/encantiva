@@ -218,6 +218,15 @@ function ativarTemaOutro() {
 // ==========================================
 // Tela 4 - Combos e mesa
 // ==========================================
+function scrollCards(direction) {
+  const container = document.getElementById("cardsCombos");
+  const scrollAmount = 250;
+  container.scrollBy({
+    left: direction * scrollAmount,
+    behavior: 'smooth'
+  });
+}
+
 function gerarCards() {
   const container = document.getElementById('cardsCombos');
   if (!container) return;
