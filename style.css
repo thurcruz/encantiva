@@ -591,7 +591,8 @@ p {
   width: 92%;
   align-items: center;
   background: #ffe6f5; /* rosa claro */
-  padding: 0px 32px 0px 0px;
+  padding: 12px 12px;
+  border: 1px solid var(--color-pink);
   border-radius: 12px;
   gap: 0px; /* espaço mínimo entre elementos */
 }
@@ -613,7 +614,7 @@ p {
 
 /* Texto do lado do ícone */
 #mesa-label {
-  font-weight: 600;
+  font-weight: 800;
   font-size: 13px;
   line-height: 1;
   color: #140033;
@@ -623,7 +624,7 @@ p {
 #switch {
   position: relative;
   width: 60px;
-  height: 30px;
+  height: 36px;
   cursor: pointer;
   flex-shrink: 0;
 }
