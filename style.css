@@ -580,54 +580,52 @@ p {
   color: var(--color-pink);
 }
 
+/* ----------------------------- */
+/* Versão Mobile - padrão        */
+/* ----------------------------- */
+
 /* Container principal da mesa */
 .mesa-container {
   display: flex;
   justify-content: space-between;
+  width: 92%;
   align-items: center;
   background: #ffe6f5; /* rosa claro */
-  padding: 0 20px;
+  padding: 0px 32px 0px 0px;
   border-radius: 12px;
-}
-
-@media (min-width: 500px) {
-.mesa-container {
-  width: 78%;
-}
+  gap: 0px; /* espaço mínimo entre elementos */
 }
 
 /* Info do lado esquerdo (ícone + texto) */
 .mesa-info {
   display: flex;
   align-items: center; /* centraliza verticalmente */
-  gap: 12px; /* distância mínima entre ícone e texto */
+  gap: 0px; /* distância reduzida entre ícone e texto */
 }
 
 /* Ícone da mesa */
 .mesa-icon {
-  width: 24px;  /* tamanho ajustado menor */
-  height: 24px;
+  width: 24px;
+  height: auto;
   object-fit: contain;
-  display: block; /* remove espaço inline */
+  display: block;
 }
 
 /* Texto do lado do ícone */
 #mesa-label {
   font-weight: 600;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1;
   color: #140033;
-  margin: 0;
 }
-
 
 /* Switch customizado */
 #switch {
   position: relative;
-  width: 72px;
-  height: 36px;
+  width: 60px;
+  height: 30px;
   cursor: pointer;
-  flex-shrink: 0; /* garante alinhamento fixo */
+  flex-shrink: 0;
 }
 
 #switch span {
@@ -639,22 +637,61 @@ p {
 }
 
 #switch button {
-  width: 36px;
-  height: 36px;
+  width: 28px;
+  height: 28px;
   background: #2C264C; /* círculo desativado */
   border: 2px solid #140033;
   border-radius: 50%;
   position: absolute;
   top: 50%;
-  left: 6px;
+  left: 4px;
   transform: translateY(-50%);
   transition: left 0.3s, background-color 0.3s;
 }
 
 /* Ativado */
 #switch.active button {
-  left: 34px;
+  left: 28px;
   background-color: #FF33CC; /* círculo ativado */
+}
+
+/* ----------------------------- */
+/* Versão Desktop                */
+/* ----------------------------- */
+@media (min-width: 481px) {
+  .mesa-container {
+    width: 75%;
+    padding: 0 20px;
+    gap: 20px;
+  }
+
+  .mesa-info {
+    gap: 24px;
+  }
+
+  .mesa-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  #mesa-label {
+    font-size: 14px;
+  }
+
+  #switch {
+    width: 72px;
+    height: 36px;
+  }
+
+  #switch button {
+    width: 36px;
+    height: 36px;
+    left: 6px;
+  }
+
+  #switch.active button {
+    left: 34px;
+  }
 }
 
 
