@@ -502,12 +502,8 @@ p {
 .cards-combos {
   display: flex;
   overflow-x: auto;
-  overflow-y: hidden; /* trava o scroll vertical */
-  -webkit-overflow-scrolling: touch;
-  scroll-snap-type: x mandatory;
-
+  
   gap: 20px;
-  scroll-behavior: smooth;
   padding: 20px 0 0 0;
   width: 100%;
  
@@ -532,14 +528,11 @@ p {
   
 }
 
-.card-combo:hover {
-  transform: scale(1.05);
-}
 
 .card-combo.selecionado {
   border-color: rgb(203, 126, 255);
   background-color: var(--color-purple);
-  box-shadow: 0 0 15px 1px rgba(128, 0, 255, 0.4); /* brilho roxo */
+ 
 }
 
 .card-combo h3 {
