@@ -505,7 +505,7 @@ p {
   overflow-y: hidden; /* trava o scroll vertical */
   -webkit-overflow-scrolling: touch;
   scroll-snap-type: x mandatory;
-  touch-action: pan-x; /* só permite arrastar na horizontal */
+
   gap: 20px;
   scroll-behavior: smooth;
   padding: 20px 0 0 0;
