@@ -330,7 +330,7 @@ p {
   font-size: 16px;
 }
 
-.grid-radios {
+.grid-radios-type {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0px 50px;
@@ -810,6 +810,7 @@ border-radius: 50px;
   gap: 12px;
   cursor: pointer;
   margin: 8px 0;
+  
 }
 
 #tela6 input[type="checkbox"] {
@@ -822,6 +823,7 @@ border-radius: 50px;
   background: transparent;
   cursor: pointer;
   position: relative;
+  
 }
 
 #tela6 input[type="checkbox"]:checked {
@@ -874,11 +876,49 @@ border-radius: 50px;
   
 }
 
+#tela8 input[type="text"], 
+#tel85 input[type="number"] {
+  margin-bottom: 12px;
+}
 
 #tela8 img {
   display: block;
   margin: 16px auto;
 }
+
+.grid-radios-pay {
+  display: flex;
+  gap: 20px; /* espaçamento entre os itens */
+  max-width: 500px;
+  margin: 0 auto;
+  flex-wrap: wrap; /* se a tela for pequena, quebra embaixo */
+}
+
+
+#tela8 input[type="radio"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--color-purple);
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+}
+
+#tela8 input[type="radio"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-pink);
+}
+
 
 .download-btn {
   background: var(--color-purple);
@@ -898,26 +938,63 @@ border-radius: 50px;
 /* ----------------------------- */
 /* Tela 9 - Resumo final         */
 /* ----------------------------- */
-.summary {
-  background: var(--color-white);
-  border: 1px solid var(--color-border-light);
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: var(--shadow);
-  margin: 20px;
+/* Estilização do campo PIX */
+.pix-box {
+  display: flex;
+  align-items: center;
+  width: 340px;
+  margin: 15px auto;
+  height: 50px; /* altura igual para tudo */
+  font-family: 'Inter', sans-serif;
 }
 
-@media (min-width: 500px) {
+.pix-box span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* mostra os três pontinhos */
+  background: #fff0f6; /* fundo rosa clarinho */
+  border: 2px solid #ff4da6; /* contorno rosa */
+  border-right: none; /* retinho no encontro com o botão */
+  border-radius: 8px 0 0 8px; /* arredondado só na esquerda */
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1; /* ocupa todo o espaço restante */
+  box-sizing: border-box;
+  height: 50px;
+}
+
+.pix-box button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ff4da6; /* rosa do botão */
+  color: #fff;
+  border: 2px solid #ff4da6; /* mesma borda para parecer contínuo */
+  border-left: none; /* retinho no encontro com o texto */
+  border-radius: 0 8px 8px 0; /* arredondado só na direita */
+  height: 50px;
+  padding: 0 10px;
+  cursor: pointer;
+  gap: 10px;
+}
+
+
+.pix-box button:hover {
+  background-color: var(--color-pink);
+}
+
+.copy-msg {
+  display: none;
+  color: var(--color-pink);
+  margin-top: 5px;
+  font-weight: bold;
   
 }
 
 
-.summary h3 {
-  margin-top: 0;
-  color: var(--color-purple-dark);
-}
 
-.summary p {
-  margin: 10px 0;
-  font-size: 1rem;
+#tela9 {
+  gap: 20px;
 }

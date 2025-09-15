@@ -7,7 +7,6 @@ let temasPorFesta = {};
 let mesaAtivada = true;
 let comboSelecionado = null;
 
-
 // ==========================================
 // Carregamento inicial
 // ==========================================
@@ -16,8 +15,6 @@ fetch('temas.json')
   .then(data => {
     temasPorFesta = data;
   });
-
-
 
 // ==========================================
 // Barra de progresso
@@ -77,6 +74,7 @@ function validarTelaAtual() {
     case 7:
       return validarData();
     case 8:
+      return validarDados();
     case 9:
       return true;
     default:
@@ -123,6 +121,24 @@ function validarData() {
   return true;
 }
 
+function validarDados() {
+  const nome = document.getElementById("nomeCliente").value;
+  if (!nome) {
+    exibirErro("Digite seu nome.");
+    return false;
+  }
+  return true;
+}
+
+function validarFormaPagamento() {
+    const formaPagamento = document.getElementById("formaPagamento").value;
+  if (!formaPagamento) {
+    exibirErro("Escolha uma forma de pagamento");
+    return false;
+  }
+  return true;
+}
+
 // ==========================================
 // Navegação entre telas
 // ==========================================
@@ -137,7 +153,10 @@ function proximaTela(n) {
   atualizarProgresso();
 
   if (telaAtual === 3) carregarTemas();
-  if (telaAtual === 8) gerarResumo();
+  if (n === 9) {
+    gerarResumo();
+    atualizarPagamentoResumo();
+  }
 }
 
 function voltarTela(n) {
@@ -211,7 +230,6 @@ function ativarTemaOutro() {
 // ==========================================
 // Tela 4 - Combos e mesa
 // ==========================================
-
 function atualizarValorTotal() {
   let total = 0;
   if (comboSelecionado !== null) {
@@ -220,69 +238,118 @@ function atualizarValorTotal() {
     total += valor;
   }
   if (mesaAtivada) total += 10;
-  document.getElementById('valorTotal').textContent = ` R$ ${total.toFixed(2)}`;
+  return total;
 }
-
 
 function selecionarCombo(index) {
   if (comboSelecionado === index) {
-    // Se clicar de novo no mesmo card → desseleciona
     comboSelecionado = null;
-    document.querySelectorAll('.card-combo').forEach(card =>
-      card.classList.remove('selecionado')
-    );
+    document.querySelectorAll('.card-combo').forEach(card => card.classList.remove('selecionado'));
   } else {
-    // Seleciona o card clicado
     comboSelecionado = index;
-    document.querySelectorAll('.card-combo').forEach((card, i) =>
-      card.classList.toggle('selecionado', i === index)
-    );
+    document.querySelectorAll('.card-combo').forEach((card, i) => card.classList.toggle('selecionado', i === index));
   }
-
-  atualizarValorTotal();
 }
 
-
-// Função para alternar o switch
 function toggleMesa() {
-    mesaAtivada = !mesaAtivada;
-    const switchEl = document.getElementById('switch');
-    const label = document.getElementById('mesa-label');
-
-    switchEl.classList.toggle('active', mesaAtivada);
-    label.textContent = mesaAtivada ? "Mesa adicionada (+R$10)" : "Adicionar mesa (+R$10)";
-
-    atualizarValorTotal();
+  mesaAtivada = !mesaAtivada;
+  const switchEl = document.getElementById('switch');
+  const label = document.getElementById('mesa-label');
+  switchEl.classList.toggle('active', mesaAtivada);
+  label.textContent = mesaAtivada ? "Mesa adicionada (+R$10)" : "Adicionar mesa (+R$10)";
 }
 
-// Função para ativar a mesa por padrão ao carregar a tela
 function inicializarMesa() {
-    const switchEl = document.getElementById('switch');
-    const label = document.getElementById('mesa-label');
-
-    switchEl.classList.add('active');
-    label.textContent = "Mesa adicionada (+R$10)";
-
-    atualizarValorTotal();
+  const switchEl = document.getElementById('switch');
+  const label = document.getElementById('mesa-label');
+  switchEl.classList.add('active');
+  label.textContent = "Mesa adicionada (+R$10)";
 }
 
-// Chama a inicialização quando a tela carregar
 window.addEventListener('DOMContentLoaded', inicializarMesa);
-
-function scrollCards(direction) {
-  const container = document.getElementById("cardsCombos");
-  const scrollAmount = 250; // quantos px rola por clique
-  container.scrollBy({
-    left: direction * scrollAmount,
-    behavior: 'smooth'
-  });
-}
 
 // ==========================================
 // Tela 8 - Resumo
 // ==========================================
 function gerarResumo() {
   const nome = document.getElementById("nomeCliente")?.value || "";
+  const tipo = document.querySelector('input[name="tipoFesta"]:checked')?.value || "";
+  const temaOutro = document.getElementById("temaOutro")?.checked;
+  const tema = temaOutro ? document.getElementById("novoTema").value : document.getElementById("pesquisaTema").value;
+  const homenageado = document.getElementById("nomeHomenageado")?.value || "";
+  const idade = document.getElementById("idadeHomenageado")?.value || "";
+  const data = document.getElementById("dataFesta")?.value || "";
+  const formaPagamento = document.querySelector('input[name="formaPagamento"]:checked')?.value || "";
+
+  const adicionais = Array.from(document.querySelectorAll('#tela6 input[type="checkbox"]:checked'))
+    .map(a => a.value)
+    .join(", ") || "Nenhum";
+
+  let comboInfo = "Nenhum";
+  if (comboSelecionado !== null) {
+    const card = document.querySelectorAll('.card-combo')[comboSelecionado];
+    const nomeCombo = card.querySelector('.combo-nome').textContent;
+    const valorCombo = parseFloat(card.querySelector('.valor').textContent.replace('R$', '').replace(',', '.'));
+    comboInfo = `${nomeCombo} (R$ ${valorCombo.toFixed(2)})`;
+  }
+
+  const valorTotal = atualizarValorTotal();
+
+  document.getElementById("resumo").innerHTML = `
+      <p><strong>Cliente:</strong> ${nome}</p>
+      <p><strong>Ocasião:</strong> ${tipo}</p>
+      <p><strong>Tema:</strong> ${tema}</p>
+      <p><strong>Combo:</strong> ${comboInfo} - ${mesaAtivada ? "Com mesa (+R$10)" : "Sem mesa"}</p>
+      <p><strong>Homenageado(s):</strong> ${homenageado} ${idade ? `(${idade} anos)` : ""}</p>
+      <p><strong>Adicionais:</strong> ${adicionais}</p>
+      <p><strong>Data de Retirada:</strong> ${data}</p>
+      <p><strong>Pagamento:</strong> ${formaPagamento}</p>
+      <p><strong>Valor Total:</strong> R$ ${valorTotal.toFixed(2)}</p>
+  `;
+}
+
+function atualizarPagamentoResumo() {
+  const formaPagamento = document.querySelector('input[name="formaPagamento"]:checked')?.value;
+  const pagamentoDiv = document.getElementById("pagamentoResumo");
+
+  const valorTotal = atualizarValorTotal();
+
+  if (formaPagamento === "Pix") {
+    const valorPix = (valorTotal / 2).toFixed(2);
+    pagamentoDiv.innerHTML = `
+      <p>Escaneie o QR Code para pagar 50% do valor: <strong>R$ ${valorPix}</strong></p>
+      <img src="qrcode.png" alt="QR Code de pagamento" width="200">
+      <p><strong>Código PIX:</strong></p>
+      <div class="pix-box">
+        <span id="pixCode">00020126580014BR.GOV.BCB.PIX0136seu-pix-aqui5204000053039865802BR5920ENCANTIVA LTDA6009SAO PAULO62070503***6304ABCD</span>
+        <button id="copyPixBtn">Copiar</button>
+      </div>
+      <span id="copyMsg" class="copy-msg">Copiado!</span>
+    `;
+
+    const copyBtn = document.getElementById("copyPixBtn");
+    const pixCode = document.getElementById("pixCode");
+    const copyMsg = document.getElementById("copyMsg");
+
+    copyBtn.addEventListener("click", () => {
+      navigator.clipboard.writeText(pixCode.textContent)
+        .then(() => {
+          copyMsg.style.display = "inline";
+          setTimeout(() => copyMsg.style.display = "none", 2000);
+        })
+        .catch(err => alert("Erro ao copiar código PIX: " + err));
+    });
+
+  } else if (formaPagamento) {
+    pagamentoDiv.innerHTML = `<p><strong>O pagamento de 50% deve ser feito na retirada. Valor total: R$ ${valorTotal.toFixed(2)}</strong></p>`;
+  } else {
+    pagamentoDiv.innerHTML = "";
+  }
+}
+
+function enviarWhatsApp() {
+  const nome = document.getElementById("nomeCliente")?.value || "";
+  const telefone = document.getElementById("telefoneCliente")?.value || "";
   const tipo = document.querySelector('input[name="tipoFesta"]:checked')?.value || "";
   const temaOutro = document.getElementById("temaOutro")?.checked;
   const tema = temaOutro ? document.getElementById("novoTema").value : document.getElementById("pesquisaTema").value;
@@ -298,32 +365,32 @@ function gerarResumo() {
   if (comboSelecionado !== null) {
     const card = document.querySelectorAll('.card-combo')[comboSelecionado];
     const nomeCombo = card.querySelector('.combo-nome').textContent;
-    const valorCombo = card.querySelector('.valor').textContent;
-    comboInfo = `${nomeCombo} (${valorCombo})`;
+    comboInfo = `${nomeCombo}`;
   }
 
-  const mesaInfo = mesaAtivada ? "Com mesa (+R$10)" : "Sem mesa";
+  const mesaInfo = mesaAtivada ? "Com mesa" : "Sem mesa";
+  const valorTotal = atualizarValorTotal();
 
-  document.getElementById("resumo").innerHTML = `
-    
-   <p><br>Olá, aqui está o resumo do meu pedido:</br></p>
-   <p><br>==============================</br></p>
-    <p>- Cliente: ${nome}</p>
-    <p>- Ocasião: ${tipo}</p>
-    <p>- Tema: ${tema}</p>
-    <p>- Combo: ${comboInfo} - ${mesaInfo}</p>
-    <p>- Homenageado(s): ${homenageado} ${idade ? `(${idade} anos)` : ""}</p>
-    <p>- Adicionais: ${adicionais}</p>
-    <p>- Data de Retirada: ${data}</p>
-  `;
-}
+  const mensagem = 
+`*Olá, equipe Encantiva! Segue o resumo do meu pedido!*
+=================== 
+*Meus Dados*
+-Cliente: ${nome}
+-Contato: ${telefone}
 
+*Detalhes do evento:*
+-Ocasião: ${tipo}
+-Data: ${data}
+-Tema: ${tema}
+-Homenageado(s): ${homenageado} ${idade ? `(${idade} anos)` : ""}
 
-function enviarWhatsApp() {
-  const resumo = document.getElementById("resumo").innerText.trim();
-  if (!resumo) return;
+*Itens selecionados:*
+-Combo: ${comboInfo} - ${mesaInfo}
+-Adicionais: ${adicionais}
+-Valor Total: R$ ${valorTotal.toFixed(2)}
+`;
 
-  const numero = "5521960147831"; // seu número
-  const url = `https://wa.me/${numero}?text=${encodeURIComponent(resumo)}`
+  const numero = "5521960147831";
+  const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
   window.open(url, "_blank");
 }
