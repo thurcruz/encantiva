@@ -29,7 +29,6 @@ body {
   padding-bottom: 80px;
 }
 
-
 h2 {
   color: var(--color-purple);
   font-weight: 900;
@@ -48,13 +47,14 @@ p {
 }
 
 @media (min-width: 500px) {
-.tela {
-  display: none;
-  flex-direction: column;
-  padding-bottom: 120px;
-  width: 61%
+  .tela {
+    display: none;
+    flex-direction: column;
+    padding-bottom: 120px;
+    width: 61%;
+  }
 }
-}
+
 .tela.ativa {
   display: flex;
 }
@@ -63,8 +63,8 @@ p {
   display: block;        
   margin: auto;  
   padding: 32px;      
-  max-width: 100%;   /* garante que nunca ultrapasse o container no mobile */
-  height: auto;       /* mantém proporção */
+  max-width: 100%;
+  height: auto;
 }
 
 @media (min-width: 500px) {
@@ -72,7 +72,7 @@ p {
     display: block;
     margin: 0;
     padding: 32px 0px;
-    max-width: 180px; /* define o tamanho máximo da logo no desktop */
+    max-width: 180px;
     height: auto;
   }
 }
@@ -85,11 +85,11 @@ p {
   width: 50%;         
   height: 100vh;      
   background-image: url('assets/BG-Desktop.png');
-  background-size: contain;       /* mantém proporção sem cortar */
-  background-repeat: no-repeat;  /* não repete a imagem */
-  background-position: right center; /* grudada à direita e centralizada verticalmente */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right center;
   display: block;
-  z-index: -1;                   /* atrás do conteúdo */
+  z-index: -1;
 }
 
 /* Esconde no mobile */
@@ -102,11 +102,9 @@ p {
 /* Ajusta conteúdo para não ficar por trás da imagem */
 @media (min-width: 768px) {
   .tela {
-    margin-right: 40%; /* espaço reservado para a imagem fixa */
+    margin-right: 40%;
   }
 }
-
-
 
 /* ----------------------------- */
 /* Barra de progresso            */
@@ -122,15 +120,9 @@ p {
 }
 
 @media (min-width: 500px) {
-.progress-bar {
-  width: 50%;
-  height: 6px;
-  background: var(--color-border-light);
-  margin-bottom: 20px;
-  border-radius: 3px;
-  overflow: hidden;
-  position: relative;
-}
+  .progress-bar {
+    width: 50%;
+  }
 }
 
 #progress {
@@ -175,13 +167,12 @@ p {
 
 @media (min-width: 500px) {
   .notificacao {
-    left: 20px;              /* cola no lado esquerdo */
-    transform: none;         /* remove centralização */
-    width: 542px;            /* largura fixa ou ajustável */
-    justify-content: flex-start; /* conteúdo alinhado à esquerda */
+    left: 20px;
+    transform: none;
+    width: 542px;
+    justify-content: flex-start;
   }
 }
-
 
 .notificacao.ativa {
   top: 20px;
@@ -197,7 +188,7 @@ p {
 /* Botões globais                */
 /* ----------------------------- */
 .btn {
-  width: 100%;         
+  width: 100%;
   height: 56px;
   border-radius: 32px;
   font-weight: 600;
@@ -227,7 +218,7 @@ p {
 
 .buttons {
   display: flex;
-  flex-direction: column; /* padrão: no celular, um em cima do outro */
+  flex-direction: column;
   gap: 12px;
   position: fixed;
   bottom: 0px;
@@ -239,21 +230,19 @@ p {
   max-width: 585px;
 }
 
-/* Para telas maiores (desktop), muda para lado a lado e posição no canto esquerdo */
 @media (min-width: 500px) {
   .buttons {
-    flex-direction: row; /* lado a lado */
-    position: fixed;     /* mantém fixo, se quiser fixo no topo ou bottom */
+    flex-direction: row;
+    position: fixed;
     left: 0px;   
-    margin: 0;       /* distância da esquerda */
+    margin: 0;
     bottom: 0px;
-    padding: 20px;        /* distância do bottom */
-    transform: none;     /* remove centralização */
+    padding: 20px;
+    transform: none;
     gap: 12px;
     width: 80%;
   }
 }
-
 
 /* ----------------------------- */
 /* Campos de entrada             */
@@ -273,27 +262,18 @@ p {
   transition: 0.2s;
 }
 
-@media (min-width: 500px) {
-  .input-padrao {
-  display: block;
-  width: 80%;
-  height: 56px;
-  padding: 14px;
-  margin-bottom: 12px;
-  border: 1px solid var(--color-pink);
-  border-radius: 32px;
-  font-size: 16px;
-  box-sizing: border-box;
-  background: var(--color-white);
-  outline: none;
-  transition: 0.2s;
-  }
-}
-
-
 .input-padrao:focus {
   border-color: var(--color-purple);
   box-shadow: 0 0 6px rgba(153, 0, 255, 0.3);
+}
+
+@media (min-width: 500px) {
+  .input-padrao {
+    width: 80%;
+    height: 56px;
+    padding: 14px;
+    margin-bottom: 12px;
+  }
 }
 
 /* ----------------------------- */
@@ -304,17 +284,6 @@ p {
   text-align: center;
   justify-content: center; 
 }
-
-@media (min-width: 500px) {
-#tela1 {
-  width: 50%;
-  align-items: center;
-  text-align: center;
-  justify-content: center; 
-  }
-}
-
-
 
 /* ----------------------------- */
 /* Tela 2 - Tipos de festa       */
@@ -337,18 +306,6 @@ p {
   max-width: 500px;
   margin: 0 auto;
 }
-
-@media (min-width: 500px) {
-.grid-radios {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0px 50px;
-  max-width: 500px;
-  margin: 0;
-}
-}
-
-
 
 #tela2 input[type="radio"] {
   -webkit-appearance: none;
@@ -374,120 +331,207 @@ p {
   background: var(--color-pink);
 }
 
-/* ----------------------------- */
-/* Tela 3 - Lista de temas       */
-/* ----------------------------- */
-.select-busca {
-  position: relative;
+/* ----------------------------- */ 
+/* Tela 3 - Lista de temas */ 
+/* ----------------------------- */ 
+.select-busca { 
+  position: relative; 
+  width: 100%; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 8px; } 
+
+
+#listaTemas { 
+  position: absolute; 
+  top: 56px; 
+  left: 0; 
+  width: 100%; 
+  background: var(--color-white); 
+  border: 1px solid var(--color-border-light); 
+  border-radius: 16px; 
+  max-height: 200px; 
+  overflow-y: auto; 
+  z-index: 10; 
+  display: none; 
+  color: #140033; 
+} 
+
+@media (min-width: 500px) { 
+  #listaTemas { 
+    position: absolute; 
+    top: 56px; 
+    left: 0; 
+    width: 80%;
+     background: var(--color-white); 
+     border: 1px solid var(--color-border-light); 
+     border-radius: 16px; 
+     max-height: 200px; 
+     overflow-y: auto; 
+     z-index: 10; 
+     display: none; 
+     color: #140033; 
+  } 
+} 
+  
+#listaTemas label { 
+    display: block;
+    padding: 10px; 
+    cursor: pointer; } 
+     
+#listaTemas label:hover { 
+    background: #f0f0f0; 
+  } 
+     
+.select-busca h2 { 
+    margin-top: 24px; 
+    margin-bottom: 8px; 
+    font-size: 18px; 
+    font-weight: 700; 
+    color: var(--color-purple); } 
+
+.hidden {
+  display: none;
+}
+
+    
+.label-temaOutro { 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+    font-size: 16px; 
+    font-weight: 600; 
+    color: var(--color-pink); 
+    cursor: pointer; margin-bottom: 8px; } 
+    
+#temaOutro { 
+      -webkit-appearance: none; 
+      appearance: none; 
+      width: 20px; 
+      height: 20px; 
+      border: 2px solid var(--color-purple); 
+      border-radius: 4px; 
+      background: transparent; 
+      cursor: pointer; 
+      position: relative; 
+      flex-shrink: 0; 
+    } 
+      
+#temaOutro:checked { 
+  background: var(--color-pink); 
+  border-color: var(--color-purple); } 
+        
+#temaOutro:checked::after { 
+  content: ""; 
+  position: absolute; 
+  top: 1px; 
+  left: 5px;
+   width: 4px; 
+   height: 10px; 
+   border: solid white; 
+   border-width: 0 2px 2px 0; 
+   transform: rotate(45deg); } 
+          
+#novoTema { 
+  display: none; 
+  margin-top: 8px; }
+
+#dataFesta {
+    text-align: center;        /* centraliza o texto */
+    color: #140033;            /* texto rosa */
+    font-size: 16px;           /* tamanho legível */
+    padding: 10px;             /* espaço interno */
+    border-radius: 28px;        /* cantos arredondados */
+    border: 1px solid var(--color-pink);    /* borda leve */
+    width: 90%;              /* largura desejada */
+    height: 32px;
+}
+
+
+.cards-tamanhos {
+  gap: 2px;
+  padding: 20px 0 0 0;
   width: 100%;
+  text-align: center;
+ 
+}
+
+.card-tamanho_desativado {
+  opacity: 0.5;
+}
+
+.badge-em-breve {
+  background-color: var(--color-pink); /* rosa */
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 6px 4px;
+  border-radius: 28px;
+  margin: 12px;
+  text-align: center;
+}
+
+.card-tamanho::-webkit-scrollbar {
+  display: none;
+}
+
+.card-tamanho {
+  flex: 0 0 220px;
+  border: 2px solid var(--color-border-light);
+  border-radius: 16px;
+  padding: 15px;
+  background-color: white;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0px;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  
 }
 
 
-
-#listaTemas {
-  position: absolute;
-  top: 56px;
-  left: 0;
-  width: 100%;
-  background: var(--color-white);
-  border: 1px solid var(--color-border-light);
-  border-radius: 16px;
-  max-height: 200px;
-  overflow-y: auto;
-  z-index: 10;
-  display: none;
-  color: #140033;
+.card-tamanho.selecionado {
+  border-color: rgb(203, 126, 255);
+  background-color: var(--color-purple);
+ 
 }
 
-@media (min-width: 500px) {
-  #listaTemas {
-  position: absolute;
-  top: 56px;
-  left: 0;
-  width: 80%;
-  background: var(--color-white);
-  border: 1px solid var(--color-border-light);
-  border-radius: 16px;
-  max-height: 200px;
-  overflow-y: auto;
-  z-index: 10;
-  display: none;
-  color: #140033;
-}
-}
-
-
-#listaTemas label {
-  display: block;
-  padding: 10px;
-  cursor: pointer;
-}
-
-#listaTemas label:hover {
-  background: #f0f0f0;
-}
-
-.select-busca h2 {
-  margin-top: 24px;
-  margin-bottom: 8px;
+.card-tamanho h3 {
+  margin: 0 0 10px 0;
   font-size: 18px;
-  font-weight: 700;
+  text-align: center;
   color: var(--color-purple);
+  font-weight: 700;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--color-border-light);
 }
 
-.label-temaOutro {
+.card-tamanho.selecionado h3 {
+  color: var(--color-white); /* título fica branco */
+  border-bottom: 2px solid var(--color-purple-dark);
+  
+}
+
+.card-tamanho.selecionado p {
+  color: var(--color-white); /* título fica branco */
+  
+}
+
+#tela6 .buttons {
+  margin-top: auto; /* gruda no rodapé */
   display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--color-pink);
-  cursor: pointer;
-  margin-bottom: 8px;
+  gap: 10px;
+  justify-content: center;
+  padding: 15px 0;
 }
 
-#temaOutro {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--color-purple);
-  border-radius: 4px;
-  background: transparent;
-  cursor: pointer;
-  position: relative;
-  flex-shrink: 0;
-}
 
-#temaOutro:checked {
-  background: var(--color-pink);
-  border-color: var(--color-purple);
-}
 
-#temaOutro:checked::after {
-  content: "";
-  position: absolute;
-  top: 1px;
-  left: 5px;
-  width: 4px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-}
-
-#novoTema {
-  display: none;
-  margin-top: 8px;
-}
 
 /* ----------------------------- */
 /* Tela 4 - Combos               */
 /* ----------------------------- */
-
 /* Container principal */
 .cards-wrapper {
   display: flex;
@@ -622,6 +666,7 @@ border-radius: 50px;
   align-items: center;
   background: #fff0f9; /* rosa claro */
   padding: 12px;
+  border-radius: 0px 50px 50px 0px;
 }
 
 @media (min-width: 600px) {
@@ -716,41 +761,12 @@ border-radius: 50px;
     width: 75%;
     padding: 12px 12px;
     gap: 20px;
+    
   }
 
   .mesa-info {
     gap: 24px;
   }
-}
-
-.obs {
-  color: var(--color-border-dark);
-  text-align: center;
-  font-size: 14px;
-
-}
-
-.containerValorTotal {
-  display: flex;
-
-  border-top: 2px solid #e3dfff;
-  justify-content: space-around;
-}
-
-
-   /* Valor total */
-#valorTotal {
-  font-size: 18px;
-  font-weight: bold;
-  padding: 16px 0px;
-  color: #140033;
-}
-
-.Total{
-  font-size: 18px;
-  font-weight: bold;
-  padding: 16px 0px;
-  color:#140033;
 }
 
 /* ----------------------------- */
@@ -793,60 +809,66 @@ border-radius: 50px;
   }
 }
 
+
+.obs {
+  color: var(--color-border-dark);
+  text-align: center;
+  font-size: 14px;
+}
+
+.link_contato {
+  color: var(--color-border-dark);
+  text-align: center;
+  font-size: 14px;
+}
+
+.containerValorTotal {
+  display: flex;
+
+  border-top: 2px solid #e3dfff;
+  justify-content: space-around;
+}
+
+
+   /* Valor total */
+#valorTotal {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 16px 0px;
+  color: #140033;
+}
+
+#totalAdicionais {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 16px 0px;
+  color: #140033;
+}
+
+.Total{
+  font-size: 18px;
+  font-weight: bold;
+  padding: 16px 0px;
+  color:#140033;
+}
+
+
 /* ----------------------------- */
-/* Tela 5 - Homenageado          */
-/* ----------------------------- */
-#tela5 input[type="text"], 
-#tela5 input[type="number"] {
+/* Tela 5 a 10                   */
+/* ============================ */
+
+/* Tela 5 - Homenageado */
+#tela4 input[type="text"] {
   margin-bottom: 12px;
 }
 
-/* ----------------------------- */
-/* Tela 6 - Adicionais           */
-/* ----------------------------- */
-#tela6 label {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-  margin: 8px 0;
-  
+#tela9 input[type="text"] {
+  margin-bottom: 12px;
 }
 
-#tela6 input[type="checkbox"] {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--color-purple);
-  border-radius: 4px;
-  background: transparent;
-  cursor: pointer;
-  position: relative;
-  
-}
 
-#tela6 input[type="checkbox"]:checked {
-  background: var(--color-pink);
-  border-color: var(--color-purple);
-}
-
-#tela6 input[type="checkbox"]:checked::after {
-  content: "";
-  position: absolute;
-  top: 1px;
-  left: 5px;
-  width: 4px;
-  height: 10px;
-  border: solid var(--color-white);
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-}
-
-/* ----------------------------- */
-/* Tela 7 - Data do evento       */
-/* ----------------------------- */
-#tela7 input[type="date"] {
+/* Tela 5 - Data do evento */
+#tela5 input[type="date"] {
   width: 100%;
   height: 56px;
   padding: 14px;
@@ -856,46 +878,88 @@ border-radius: 50px;
   outline: none;
 }
 
-@media (min-width: 500px) {
-  
+/* Tela 6 - Adicionais */
+.adicionais-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.adicional-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid #ff4da6;
+  border-radius: 10px;
+  padding: 12px;
+  background: #fff0f6;
 }
 
-
-/* ----------------------------- */
-/* Tela 8 - Dados + contrato     */
-/* ----------------------------- */
-#resumo {
-  background: var(--color-white);
-  border: 1px solid var(--color-border-light);
-  border-radius: 16px;
-  padding: 16px;
-  margin-bottom: 20px;
-}
-
-@media (min-width: 500px) {
-  
-}
-
-#tela8 input[type="text"], 
-#tel85 input[type="number"] {
+.adicional-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
   margin-bottom: 12px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background-color: #fff;
 }
 
-#tela8 img {
-  display: block;
-  margin: 16px auto;
+.adicional-card .info h4 {
+  margin: 0;
+  font-size: 16px;
+  color: var(--color-purple);
 }
+
+.adicional-card .info p {
+  margin: 4px 0 0 0;
+  font-size: 12px;
+  color: #555;
+}
+
+.adicional-card .quantidade {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.adicional-card .quantidade button {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--color-purple);
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.adicional-card .quantidade button:hover {
+  background-color: #ab67f0; /* tom mais claro ao passar o mouse */
+}
+
+.adicional-card .quantidade span {
+  min-width: 24px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 16px;
+  display: inline-block;
+}
+
 
 .grid-radios-pay {
-  display: flex;
-  gap: 20px; /* espaçamento entre os itens */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0px 50px;
   max-width: 500px;
   margin: 0 auto;
-  flex-wrap: wrap; /* se a tela for pequena, quebra embaixo */
 }
 
 
-#tela8 input[type="radio"] {
+
+#tela9 input[type="radio"] {
   -webkit-appearance: none;
   appearance: none;
   width: 20px;
@@ -907,7 +971,7 @@ border-radius: 50px;
   position: relative;
 }
 
-#tela8 input[type="radio"]:checked::after {
+#tela9 input[type="radio"]:checked::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -920,31 +984,30 @@ border-radius: 50px;
 }
 
 
-.download-btn {
-  background: var(--color-purple);
-  color: var(--color-white);
-  text-align: center;
-  text-decoration: none;
-  padding: 12px 18px;
-  border-radius: 5px;
-  display: inline-block;
-  transition: background 0.2s;
+#tela10 {
+  gap: 12px;
 }
 
-.download-btn:hover {
-  background: var(--color-pink);
+.descricaoResumo {
+  color: #140033;
 }
 
-/* ----------------------------- */
-/* Tela 9 - Resumo final         */
-/* ----------------------------- */
-/* Estilização do campo PIX */
+/* Tela 10 - Dados + contrato */
+#resumo {
+  background: var(--color-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+/* Tela 9 - Resumo final */
 .pix-box {
   display: flex;
   align-items: center;
-  width: 340px;
+  width: 350px;
   margin: 15px auto;
-  height: 50px; /* altura igual para tudo */
+  height: 48px; /* altura igual para tudo */
   font-family: 'Inter', sans-serif;
 }
 
@@ -953,48 +1016,40 @@ border-radius: 50px;
   overflow: hidden;
   text-overflow: ellipsis; /* mostra os três pontinhos */
   background: #fff0f6; /* fundo rosa clarinho */
-  border: 2px solid #ff4da6; /* contorno rosa */
+  border: 2px solid var(--color-border-light); /* contorno rosa */
   border-right: none; /* retinho no encontro com o botão */
   border-radius: 8px 0 0 8px; /* arredondado só na esquerda */
-  padding: 0 10px;
+  padding: 10px 10px 10px 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex: 1; /* ocupa todo o espaço restante */
   box-sizing: border-box;
+  
   height: 50px;
+}
+
+.copy-msg {
+  color: var(--color-pink);
 }
 
 .pix-box button {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #ff4da6; /* rosa do botão */
+  background: var(--color-pink); /* rosa do botão */
   color: #fff;
-  border: 2px solid #ff4da6; /* mesma borda para parecer contínuo */
+  border: 2px solid var(--color-pink); /* mesma borda para parecer contínuo */
   border-left: none; /* retinho no encontro com o texto */
   border-radius: 0 8px 8px 0; /* arredondado só na direita */
   height: 50px;
   padding: 0 10px;
   cursor: pointer;
   gap: 10px;
-}
 
+  font-family: 'Inter';
+}
 
 .pix-box button:hover {
   background-color: var(--color-pink);
-}
-
-.copy-msg {
-  display: none;
-  color: var(--color-pink);
-  margin-top: 5px;
-  font-weight: bold;
-  
-}
-
-
-
-#tela9 {
-  gap: 20px;
 }
