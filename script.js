@@ -342,20 +342,36 @@ window.addEventListener('DOMContentLoaded', inicializarMesa);
 function atualizarValorTotal() {
   let total = 0;
 
+  // Valor do combo
   if (comboSelecionado !== null) {
     const card = document.querySelectorAll('#tela7 .card-combo')[comboSelecionado];
-    const valor = parseFloat(card.querySelector('.valor').textContent.replace('R$', '').replace(',', '.'));
-    total += valor;
+    const valorCombo = parseFloat(card.querySelector('.valor').textContent.replace('R$', '').replace(',', '.'));
+    total += valorCombo;
   }
 
+  // Adicionar mesa
   if (mesaAtivada) total += 10;
 
+  // Adicionais
   adicionais.forEach((item, i) => {
     total += (quantidadesAdicionais[i] || 0) * item.valor;
   });
 
+  // Aplicar desconto após somar tudo
+  if (comboSelecionado !== null) {
+    const card = document.querySelectorAll('#tela7 .card-combo')[comboSelecionado];
+    const nomeCombo = card.querySelector('.combo-nome').textContent.toLowerCase();
+    if (nomeCombo.includes('essencial')) {
+      total *= 0.90; // 10% de desconto
+    } else if (nomeCombo.includes('inesquecível')) {
+      total *= 0.85; // 15% de desconto
+    }
+  }
+
+  // Atualizar na tela
   const totalEl = document.getElementById("valorTotal");
   if (totalEl) totalEl.textContent = `R$ ${total.toFixed(2)}`;
+
   return total;
 }
 
