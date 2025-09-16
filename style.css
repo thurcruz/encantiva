@@ -561,10 +561,9 @@ p {
   flex: 0 0 220px;
   border: 2px solid var(--color-border-light);
   border-radius: 16px;
-  padding: 15px;
+  padding: 0px 0px 0px 0px;
   background-color: white;
   cursor: pointer;
-
   display: flex;
   flex-direction: column;
   gap: 0px;
@@ -580,7 +579,7 @@ p {
 }
 
 .card-combo h3 {
-  margin: 0 0 10px 0;
+  margin: 16px;
   font-size: 18px;
   text-align: center;
   color: var(--color-purple);
@@ -600,6 +599,14 @@ p {
   color: var(--color-white); /* itens mudam de cor */
 }
 
+.card-combo .combo-itens {
+  margin: 16px; /* ajusta espaçamento entre itens */
+  font-size: 14px;
+  font-weight: 800;
+  color: #140033;
+  gap: 20px;
+}
+
 .card-combo .combo-itens h4 {
   margin: 4px 4px; /* ajusta espaçamento entre itens */
   font-size: 14px;
@@ -616,30 +623,61 @@ p {
   gap: 20px;
 }
 
-.card-combo .valor {
-  text-align: center;
-  align-items: center;
-  font-size: 16px;
-  font-weight: bold;
-  margin: 10px;
-  padding: 10px;
-border-radius: 50px;
-  border: solid 2px var(--color-purple);
-  color: var(--color-purple);
+.card-combo .itens-promoção {
+  margin: 16px; /* ajusta espaçamento entre itens */
+  font-size: 14px;
+  color: var(--color-pink);
+  gap: 20px;
 }
 
-.card-combo.selecionado .valor {
+.card-combo .itens-promoção h4, 
+.card-combo .itens-promoção p { /* ajusta espaçamento entre itens */
+  margin: 4px;
+  font-size: 14px;
+  color: var(--color-pink);
+  gap: 20px;
+}
+
+.card-combo.selecionado .itens-promoção h4, 
+.card-combo.selecionado .itens-promoção p {
+  margin: 4px; /* ajusta espaçamento entre itens */
+  font-size: 14px;
+  color: var(--color-white);
+  gap: 20px;
+}
+
+
+.card-combo .valor {
+  width: 250px;
   text-align: center;
   align-items: center;
   font-size: 16px;
   font-weight: bold;
-  margin: 10px;
-  padding: 10px;
-border-radius: 50px;
-  background-color:var(--color-purple-dark);
+  padding: 16px 0px 16px 0px;
+  margin: 0 0 0 0;
+  border-radius: 0px 0px 16px 16px;
+  border-color: 2px solid #90f;
+  background-color: var(--color-pink);
   color: var(--color-white);
 }
 
+.card-combo.selecionado .valor {
+  width: 250px;
+  text-align: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 16px 0px 16px 0px;
+  margin: 0 0 0 0;
+  border-radius: 0px 0px 16px 16px;
+  border-color: 2px solid #90f;
+  background-color: var(--color-purple-dark);
+  color: var(--color-white);
+}
+
+.item-promoçao p {
+  color: #90f;
+}
 
 /* Desktop */
 @media (min-width: 500px) {

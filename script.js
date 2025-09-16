@@ -1,7 +1,7 @@
 flatpickr("#dataFesta", {
-    dateFormat: "d/m/Y",  // formato dia/mês/ano
-   minDate: new Date().fp_incr(7),      // só datas a partir de hoje
-    allowInput: true       // permite digitar manualmente
+    dateFormat: "d/m/Y",  
+   minDate: new Date().fp_incr(7),      
+    allowInput: true       
 });
 
 // ==========================================
