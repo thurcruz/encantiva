@@ -600,7 +600,7 @@ p {
 }
 
 .card-combo .combo-itens {
-  margin: 16px; /* ajusta espaçamento entre itens */
+  margin: 0 0 0 16px; /* ajusta espaçamento entre itens */
   font-size: 14px;
   font-weight: 800;
   color: #140033;
@@ -624,7 +624,7 @@ p {
 }
 
 .card-combo .itens-promoção {
-  margin: 16px; /* ajusta espaçamento entre itens */
+  margin: 0px 0px 10px 16px; /* ajusta espaçamento entre itens */
   font-size: 14px;
   color: var(--color-pink);
   gap: 20px;
