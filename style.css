@@ -737,7 +737,7 @@ p {
 #mesa-label {
   font-weight: 800;
   font-size: 14px;
-  line-height: 1;
+  line-height: 24px;
   color: #140033;
   margin: 0;
   padding: 2px 0px;
@@ -883,12 +883,14 @@ p {
   color: #140033;
 }
 
+
 .Total{
   font-size: 18px;
   font-weight: bold;
   padding: 16px 0px;
   color:#140033;
 }
+
 
 
 /* ----------------------------- */
@@ -917,6 +919,117 @@ p {
 }
 
 /* Tela 6 - Adicionais */
+/* Container principal da mesa */
+.adicionais-button {
+  display: flex;
+  justify-content: space-between;
+  width: 92%;
+  align-items: center;
+  background: #fff0f9; /* rosa claro */
+  padding: 12px;
+  border-radius: 0px 50px 50px 0px;
+  margin:0px 0px 12px 0px;
+}
+
+@media (min-width: 600px) {
+.adicionais-button {
+  width: 100%;
+}
+}
+
+/* Info do lado esquerdo (label + descrição) */
+.adicionais-info {
+  display: flex;
+  flex-direction: column; /* empilha label e desc */
+  align-items: flex-start; /* alinha à esquerda */
+  gap: 12 px; /* distância mínima entre label e descrição */
+  width: 60%;
+}
+
+@media (min-width: 500px) {
+.adicionais-info {
+  display: flex;
+  flex-direction: column; /* empilha label e desc */
+  align-items: flex-start; /* alinha à esquerda */
+  gap: 2 px; /* distância mínima entre label e descrição */
+}
+}
+
+
+/* Label principal */
+#adicionais-label {
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 24px;
+  color: #140033;
+  margin: 0;
+}
+
+/* Descrição */
+#desc-adicionais {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1;
+  color: #140033;
+  margin: 0;
+  padding: 2px 0px;
+}
+
+
+/* Switch customizado */
+#switchAdicionais {
+  position: relative;
+  width: 60px;
+  height: 36px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+#switchAdicionais span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #140033; /* fundo base */
+  border-radius: 9999px;
+}
+
+#switchAdicionais button {
+  width: 28px;
+  height: 28px;
+  background: #2C264C; /* círculo desativado */
+  border: 2px solid #140033;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 4px;
+  transform: translateY(-50%);
+  transition: left 0.3s, background-color 0.3s;
+  cursor: pointer;
+}
+
+/* Ativado */
+#switchAdicionais.active button {
+  left: 28px;
+  background-color: #FF33CC; /* círculo ativado */
+}
+
+/* ----------------------------- */
+/* Versão Desktop                */
+/* ----------------------------- */
+@media (min-width: 481px) {
+  .adicionais-button {
+    width: 75%;
+    padding: 12px 12px;
+    gap: 20px;
+    
+  }
+
+  .adicionais-info {
+    gap: 24px;
+  }
+}
+
+
 .adicionais-container {
   display: flex;
   flex-direction: column;

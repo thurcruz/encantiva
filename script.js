@@ -14,6 +14,7 @@ let mesaAtivada = true;
 let comboSelecionado = null;
 let tamanhoSelecionado = null;
 let quantidadesAdicionais = [];
+let adicionaisAtivos = true;
 
 // ==========================================
 // Carregamento inicial
@@ -81,8 +82,8 @@ function validarTelaAtual() {
     case 6: return tamanhoSelecionado !== null || (exibirErro("Escolha entre Festa na Mesa ou Festão."), false);
     case 7: return comboSelecionado !== null || (exibirErro("Escolha um combo para continuar."), false);
     case 8: return true;
-    case 9: return validarDados();
-    case 10: return validarFormaPagamento();
+    case 9: return validarDados(); // já valida nome + pagamento
+    case 10: return true; // não precisa mais validar pagamento aqui
     default: return true;
   }
 }
@@ -122,7 +123,18 @@ function validarData() {
 
 function validarDados() {
   const nome = document.getElementById("nomeCliente").value.trim();
-  if (!nome) { exibirErro("Digite seu nome."); return false; }
+  const formaPagamento = document.querySelector('input[name="formaPagamento"]:checked')?.value;
+
+  if (!nome) {
+    exibirErro("Digite seu nome.");
+    return false;
+  }
+
+  if (!formaPagamento) {
+    exibirErro("Insira uma forma de pagamento antes de prosseguir.");
+    return false;
+  }
+
   return true;
 }
 
@@ -242,76 +254,10 @@ function inicializarCardsTamanho() {
 // ==========================================
 // Tela 7 - Combos e mesa
 // ==========================================
-const adicionais = [
-  { nome: "Bolo (2 Recheios)", descricao: "Adicione 10 fatias", valor: 60 },
-  { nome: "Docinhos simples", descricao: "5 uni.", valor: 4.50 },
-  { nome: "Docinhos gourmet", descricao: "5 uni.", valor: 8 },
-  { nome: "Cupcakes", descricao: "5 uni.", valor: 20 },
-  { nome: "Mini Donuts", descricao: "5 uni.", valor: 10 },
-];
 
 function inicializarCardsCombo() {
   const cards = document.querySelectorAll('#tela6 .card-combo');
   cards.forEach((card, i) => card.addEventListener('click', () => selecionarCombo(i)));
-}
-
-function renderizarAdicionais() {
-  const container = document.getElementById("adicionaisContainer");
-  if (!container) return;
-  container.innerHTML = "";
-
-adicionais.forEach((item, index) => {
-  const card = document.createElement("div");
-  card.className = "adicional-card";
-  card.innerHTML = `
-    <div class="info">
-      <h4>${item.nome}</h4>
-      <p>${item.descricao}</p>
-      <span class="preco">R$ ${item.valor.toFixed(2)}</span>
-    </div>
-    <div class="quantidade">
-      <button onclick="alterarQuantidade(${index}, -1)">-</button>
-      <span id="qtd-${index}">${quantidadesAdicionais[index] || 0}</span>
-      <button onclick="alterarQuantidade(${index}, 1)">+</button>
-    </div>
-  `;
-  container.appendChild(card);
-});
-
-  // Mostrar valor total do combo + mesa + adicionais na tela de adicionais
-  const totalContainer = document.getElementById("totalAdicionais");
-  if (totalContainer) {
-    totalContainer.textContent = `R$ ${atualizarValorTotal().toFixed(2)}`;
-  }
-}
-
-// Atualizar o total também ao alterar quantidade
-function alterarQuantidade(index, delta) {
-  const maximo = 10; // aqui você pode definir individualmente por adicional
-  quantidadesAdicionais[index] = Math.min(
-    maximo,
-    Math.max(0, (quantidadesAdicionais[index] || 0) + delta)
-  );
-  document.getElementById(`qtd-${index}`).textContent = quantidadesAdicionais[index];
-
-  // Atualiza valor total
-  const totalContainer = document.getElementById("totalAdicionais");
-  if (totalContainer) {
-    totalContainer.textContent = `R$ ${atualizarValorTotal().toFixed(2)}`;
-  }
-}
-
-
-function selecionarCombo(index) {
-  if (comboSelecionado === index) {
-    comboSelecionado = null;
-    document.querySelectorAll('.card-combo').forEach(card => card.classList.remove('selecionado'));
-  } else {
-    comboSelecionado = index;
-    document.querySelectorAll('.card-combo').forEach((card, i) => card.classList.toggle('selecionado', i === index));
-  }
-
-  atualizarValorTotal();
 }
 
 function toggleMesa() {
@@ -338,6 +284,109 @@ function inicializarMesa() {
 
 // Chama a inicialização quando a tela carregar
 window.addEventListener('DOMContentLoaded', inicializarMesa);
+
+function selecionarCombo(index) {
+  if (comboSelecionado === index) {
+    comboSelecionado = null;
+    document.querySelectorAll('.card-combo').forEach(card => card.classList.remove('selecionado'));
+  } else {
+    comboSelecionado = index;
+    document.querySelectorAll('.card-combo').forEach((card, i) => card.classList.toggle('selecionado', i === index));
+  }
+
+  atualizarValorTotal();
+}
+
+
+const adicionais = [
+  { nome: "Bolo (2 Recheios)", descricao: " 1 Porção c/ 10 fatias", valor: 60 },
+  { nome: "Docinhos simples", descricao: "1 Porção c/ 5 uni.", valor: 4.50 },
+  { nome: "Docinhos gourmet", descricao: "1 Porção c/ 5 uni.", valor: 8 },
+  { nome: "Cupcakes", descricao: "1 Porção c/ 5 uni.", valor: 20 },
+  { nome: "Mini Donuts", descricao: "1 Porção c/ 5 uni.", valor: 10 },
+];
+
+
+// Inicializar adicionais
+function inicializarAdicionais() {
+  const switchAdd = document.getElementById("switchAdicionais");
+  const labelAdd = document.getElementById("adicionais-label");
+
+  // Estado inicial
+  switchAdd.classList.add('active');
+  labelAdd.textContent = "Quero adicionais"; // Texto inicial
+  renderizarAdicionais();
+}
+
+// Toggle adicionais com atualização do texto
+function toggleAdicionais() {
+  adicionaisAtivos = !adicionaisAtivos;
+
+  const switchEl = document.getElementById("switchAdicionais");
+  const labelAdd = document.getElementById("adicionais-label");
+
+  switchEl.classList.toggle("active", adicionaisAtivos);
+  labelAdd.textContent = adicionaisAtivos ? "Quero adicionais" : "Não quero adicionais";
+
+  // Zera quantidades se desativado
+  if (!adicionaisAtivos) quantidadesAdicionais = Array(adicionais.length).fill(0);
+
+  renderizarAdicionais();
+  atualizarValorTotal();
+}
+
+// Chama ao carregar a tela
+window.addEventListener('DOMContentLoaded', inicializarAdicionais);
+
+
+function renderizarAdicionais() {
+  const container = document.getElementById("adicionaisContainer");
+  if (!container) return;
+
+  container.innerHTML = "";
+  container.style.display = adicionaisAtivos ? "block" : "none";
+
+  if (!adicionaisAtivos) return;
+
+  adicionais.forEach((item, index) => {
+    const card = document.createElement("div");
+    card.className = "adicional-card";
+    card.innerHTML = `
+      <div class="info">
+        <h4>${item.nome}</h4>
+        <p>${item.descricao}</p>
+        <span class="preco">R$ ${item.valor.toFixed(2)}</span>
+      </div>
+      <div class="quantidade">
+        <button onclick="alterarQuantidade(${index}, -1)">-</button>
+        <span id="qtd-${index}">${quantidadesAdicionais[index] || 0}</span>
+        <button onclick="alterarQuantidade(${index}, 1)">+</button>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+
+  const totalContainer = document.getElementById("totalAdicionais");
+  if (totalContainer) totalContainer.textContent = `R$ ${atualizarValorTotal().toFixed(2)}`;
+}
+
+
+
+// Atualizar o total também ao alterar quantidade
+function alterarQuantidade(index, delta) {
+  const maximo = 10; // aqui você pode definir individualmente por adicional
+  quantidadesAdicionais[index] = Math.min(
+    maximo,
+    Math.max(0, (quantidadesAdicionais[index] || 0) + delta)
+  );
+  document.getElementById(`qtd-${index}`).textContent = quantidadesAdicionais[index];
+
+  // Atualiza valor total
+  const totalContainer = document.getElementById("totalAdicionais");
+  if (totalContainer) {
+    totalContainer.textContent = `R$ ${atualizarValorTotal().toFixed(2)}`;
+  }
+}
 
 function atualizarValorTotal() {
   let total = 0;
@@ -390,9 +439,17 @@ function getResumoPedido() {
   const formaPagamento = document.querySelector('input[name="formaPagamento"]:checked')?.value || "";
 
   const adicionaisSelecionados = adicionais
-    .filter((_, i) => (quantidadesAdicionais[i] || 0) > 0)
-    .map((item, i) => `${item.nome} x${quantidadesAdicionais[i]}`)
-    .join(", ") || "Nenhum";
+  .map((item, i) => {
+    const qtd = quantidadesAdicionais[i] || 0;
+    if (qtd > 0) {
+      const subtotal = (qtd * item.valor).toFixed(2);
+      return `${item.nome} - ${qtd} porções`;
+    }
+    return null;
+  })
+  .filter(Boolean)
+  .join(", ") || "Nenhum";
+
 
   let comboInfo = "Nenhum";
   if (comboSelecionado !== null) {
@@ -419,7 +476,7 @@ function gerarResumo() {
     <p class="descricaoResumo"><strong>Tema:</strong> ${resumo.tema}</p>
     <p class="descricaoResumo"><strong>Tamanho:</strong> ${resumo.tamanho}</p>
     <p class="descricaoResumo"><strong>Combo:</strong> ${resumo.comboInfo} - ${resumo.mesaInfo}</p>
-    <p class="descricaoResumo"><strong>Homenageado(s):</strong> ${resumo.homenageado} ${resumo.idade ? `(${resumo.idade} anos)` : ""}</p>
+    <p class="descricaoResumo"><strong>Homenageado(s):</strong> ${resumo.homenageado} ${resumo.idade ? `(${resumo.idade} anos)` : "e idade não informada"}</p>
     <p class="descricaoResumo"><strong>Adicionais:</strong> ${resumo.adicionaisSelecionados}</p>
     <p class="descricaoResumo"><strong>Data de Retirada:</strong> ${resumo.data}</p>
     <p class="descricaoResumo"><strong>Pagamento:</strong> ${resumo.formaPagamento}</p>

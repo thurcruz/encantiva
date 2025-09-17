@@ -149,16 +149,21 @@
 
   <!-- Tela 7: Combo -->
   <section id="tela7" class="tela">
-<img src="assets/logo_horizontal.svg" alt="Logo Encantiva"> 
+    <img src="assets/logo_horizontal.svg" alt="Logo Encantiva"> 
     <h2>Escolha seu combo</h2> 
     <p>Selecione de acordo com a sua preferência:</p> 
-    <div class="mesa-container"> <div class="mesa-info"> 
-      <span id="mesa-label">Adicionar mesa (+R$10)</span> 
-      <span id="desc-mesa">Obs: Os valores do combo abaixo não inclui mesa!</span> 
-    
-    </div> <div id="switch" onclick="toggleMesa()"> <button></button> 
+    <div class="mesa-container"> 
+        <div class="mesa-info"> 
+          <span id="mesa-label">Adicionar mesa (+R$10)</span> 
+          <span id="desc-mesa">Obs: Os valores do combo abaixo não inclui mesa!</span> 
+        </div> 
+        <div id="switch" onclick="toggleMesa()"> 
+          <button></button> 
+          <span></span> 
+        </div> 
+    </div> 
       
-      <span></span> </div> </div> <!-- Container dos cards --> 
+      <!-- Container dos cards --> 
       <div class="cards-wrapper"> 
       <div class="cards-combos" id="cardsCombos"> 
         <!-- Card Essencial --> 
@@ -252,8 +257,22 @@
   <img src="assets/logo_horizontal.svg" alt="Logo Encantiva"> 
   <h2>Adicionais</h2> 
   <p>Selecione os adicionais desejados:</p> 
-  <div id="adicionaisContainer" class="adicionais-container"></div> 
+      <div class="adicionais-button"> 
+        <div class="adicionais-info"> 
+          <span id="adicionais-label"></span> 
+          <span id="desc-adicionais">Obs: Desative caso deseje só a decoração da festa!</span> 
+        </div> 
+        <div id="switchAdicionais" onclick="toggleAdicionais()"> 
+          <button></button> 
+          <span></span> 
+        </div> 
+    </div> 
 
+  <div id="adicionaisContainer" class="adicionais-container"> </div> 
+
+   <h5 class="obs"> Clique no " + " para adicionar a quantidade de porções que desejar.
+    Clique no " - " para Retirar a quantidade de porções selecionadas.
+   </h5>
   <div class="containerValorTotal"> 
     <div class="Total">Total:</div> 
     <div id="totalAdicionais"></div> 
