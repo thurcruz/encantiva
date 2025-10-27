@@ -299,8 +299,8 @@ function selecionarCombo(index) {
 
 
 const adicionais = [
-  { nome: "Bolo (2 Recheios)", descricao: " 1 Porção c/ 10 fatias", valor: 60 },
-  { nome: "Docinhos simples", descricao: "1 Porção c/ 5 uni.", valor: 4.50 },
+  { nome: "Bolo (2 Recheios)", descricao: "Adicione 10 fatias", valor: 60 },
+  { nome: "Docinhos simples", descricao: "1 Porção c/ 10 uni.", valor: 4.50 },
   { nome: "Docinhos gourmet", descricao: "1 Porção c/ 5 uni.", valor: 8 },
   { nome: "Cupcakes", descricao: "1 Porção c/ 5 uni.", valor: 20 },
   { nome: "Mini Donuts", descricao: "1 Porção c/ 5 uni.", valor: 10 },
@@ -374,7 +374,7 @@ function renderizarAdicionais() {
 
 // Atualizar o total também ao alterar quantidade
 function alterarQuantidade(index, delta) {
-  const maximo = 10; // aqui você pode definir individualmente por adicional
+  const maximo = 20; // aqui você pode definir individualmente por adicional
   quantidadesAdicionais[index] = Math.min(
     maximo,
     Math.max(0, (quantidadesAdicionais[index] || 0) + delta)
@@ -407,15 +407,15 @@ function atualizarValorTotal() {
   });
 
   // Aplicar desconto após somar tudo
-  if (comboSelecionado !== null) {
-    const card = document.querySelectorAll('#tela7 .card-combo')[comboSelecionado];
-    const nomeCombo = card.querySelector('.combo-nome').textContent.toLowerCase();
-    if (nomeCombo.includes('essencial')) {
-      total *= 0.90; // 10% de desconto
-    } else if (nomeCombo.includes('inesquecível')) {
-      total *= 0.85; // 15% de desconto
-    }
-  }
+  // if (comboSelecionado !== null) {
+  // const card = document.querySelectorAll('#tela7 .card-combo')[comboSelecionado];
+  // const nomeCombo = card.querySelector('.combo-nome').textContent.toLowerCase();
+  // if (nomeCombo.includes('essencial')) {
+ //     total *= 0.90; // 10% de desconto
+  //  } else if (nomeCombo.includes('inesquecível')) {
+  //    total *= 0.85; // 15% de desconto
+ //   }
+  //}
 
   // Atualizar na tela
   const totalEl = document.getElementById("valorTotal");
