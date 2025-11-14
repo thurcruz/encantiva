@@ -1,3 +1,38 @@
+.blackfriday-bar {
+  width: 100%;
+  background: var(--color-pink);
+  color: #fff;
+  padding: 8px 0;
+  overflow: hidden;
+  position: relative;
+  z-index: 9999;
+}
+
+.blackfriday-track {
+  white-space: nowrap;
+  display: inline-block;
+  animation: correr 12s linear infinite;
+}
+
+.blackfriday-track span {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-right: 50px;
+}
+
+/* Animação */
+@keyframes correr {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+
+
 /* ----------------------------- */
 /* Variáveis globais             */
 /* ----------------------------- */
@@ -91,6 +126,8 @@ p {
   display: block;
   z-index: -1;
 }
+
+
 
 /* Esconde no mobile */
 @media (max-width: 767px) {
